@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search } from "lucide-react";
-import image from "../assets/jpnatc_icon.png";
+import image from "../../assets/jpnatc_icon.png";
 
 export default function Header() {
     const [openDropdown, setOpenDropdown] = useState(null);
@@ -113,7 +113,7 @@ export default function Header() {
                             )}
                         </div>
 
-<a href="/about/history">Staff</a>
+                        <a href="/about/history">Staff</a>
                         <a href="/about/mission">Faculty</a>
 
                         {/* Education Dropdown */}
@@ -140,7 +140,7 @@ export default function Header() {
                             )}
                         </div>
 
-                        <a href="#">Notices</a>
+                        <a href="/education/undergraduate">Notices</a>
 
                         {/* Contact Dropdown */}
                         <div

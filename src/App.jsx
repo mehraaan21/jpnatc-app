@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import InfoCards from "./components/InfoCards";
-import Faculty from "./components/Faculty";
-import Awareness from "./components/ Awareness";
-import Feedback from "./components/Feedback";
-import Footer from "./components/Footer";
+import Navbar from "./components/homepage/Navbar";
+import Hero from "./components/homepage/Hero";
+import InfoCards from "./components/homepage/InfoCards";
+import Faculty from "./components/homepage/Faculty";
+import Awareness from "./components/homepage/ Awareness";
+import Feedback from "./components/homepage/Feedback";
+import Footer from "./components/homepage/Footer";
 import History from "./components/about/History";
 import Mission from "./components/about/Mission";
 import AimsAndObjective from "./components/about/AimsAndObjective";
