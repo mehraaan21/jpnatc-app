@@ -113,8 +113,8 @@ export default function Header() {
                             )}
                         </div>
 
-                        <a href="#">Staff</a>
-                        <a href="#">Faculty</a>
+<a href="/about/history">Staff</a>
+                        <a href="/about/mission">Faculty</a>
 
                         {/* Education Dropdown */}
                         <div
