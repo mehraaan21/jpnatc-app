@@ -100,7 +100,7 @@
 
 import React from "react";
 import Lottie from "lottie-react"; 
-import animationData from "../assets/Doctor.json"; 
+import animationData from "../../assets/Doctor.json"; 
 
 export default function Hero() {
   const defaultOptions = {
