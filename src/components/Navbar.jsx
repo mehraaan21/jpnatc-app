@@ -9,19 +9,26 @@ export default function Header() {
         about: [
             { name: "History", href: "/about/history" },
             { name: "Mission", href: "/about/mission" },
-            { name: "Facilities", href: "/about/facilities" },
+            { name: "Aims And Objective", href: "/about/aims-and-objective" },
+             { name: "Facilities", href: "/about/facilities" },
+              { name: "Heirarchy", href: "/about/heirarchy" },
+               { name: "Photo Gallery", href: "/about/photo-gallery" },
+                { name: "IT Innovation", href: "/about/it-innovation" },
+                 { name: "Ex Chief", href: "/about/ex-chief" },
+
         ],
         contact: [
-            { name: "Contact Us", href: "#" },
-            { name: "Location", href: "#" },
+            { name: "Contact Us", href: "/contact/contact-us" },
+            { name: "Location", href: "/contact/location" },
+            { name: "Right To Information", href: "/contact/right-to-information" },
 
             
         ],
         education: [
-            { name: "Undergraduate Programs", href: "#" },
-            { name: "Postgraduate Courses", href: "#" },
-            { name: "Research Programs", href: "#" },
-            { name: "Continuing Education", href: "#" },
+            { name: "Undergraduate Programs", href: "/education/undergraduate" },
+            { name: "Postgraduate Courses", href: "/education/postgraduate" },
+            { name: "Research Programs", href: "/education/research" },
+            { name: "Continuing Education", href: "/education/continuing-education" },
         ],
     };
 
@@ -142,7 +149,7 @@ export default function Header() {
                             onMouseLeave={handleMouseLeave}
                         >
                             <div className="flex items-center gap-1 cursor-pointer py-2">
-                                Contact <span className="text-xl">⬇</span>
+                                Contact <span className="text-xs">▾</span>
                             </div>
                             {openDropdown === "contact" && (
                                 <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
