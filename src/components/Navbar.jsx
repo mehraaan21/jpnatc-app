@@ -1,7 +1,38 @@
+import { useState } from "react";
 import { Search } from "lucide-react";
-import image from "../assets/jpnatc_icon.png"
+import image from "../assets/jpnatc_icon.png";
 
 export default function Header() {
+    const [openDropdown, setOpenDropdown] = useState(null);
+
+    const dropdowns = {
+        about: [
+            { name: "History", href: "/about/history" },
+            { name: "Mission", href: "/about/mission" },
+            { name: "Facilities", href: "/about/facilities" },
+        ],
+        contact: [
+            { name: "Contact Us", href: "#" },
+            { name: "Location", href: "#" },
+
+            
+        ],
+        education: [
+            { name: "Undergraduate Programs", href: "#" },
+            { name: "Postgraduate Courses", href: "#" },
+            { name: "Research Programs", href: "#" },
+            { name: "Continuing Education", href: "#" },
+        ],
+    };
+
+    const handleMouseEnter = (dropdown) => {
+        setOpenDropdown(dropdown);
+    };
+
+    const handleMouseLeave = () => {
+        setOpenDropdown(null);
+    };
+
     return (
         <header className="w-full">
             {/* ================= TOP BLUE BAR ================= */}
@@ -18,15 +49,15 @@ export default function Header() {
                     </div>
 
                     {/* Right */}
-                    <div className="flex  text-gray-700 items-center gap-4">
-                        <a href="#" className=" text-gray-700 ">
+                    <div className="flex text-gray-700 items-center gap-4">
+                        <a href="#" className="text-gray-700">
                             Old website version
                         </a>
                         <span>|</span>
-                        <a href="#" className=" text-gray-700">
+                        <a href="#" className="text-gray-700">
                             English
                         </a>
-                        <a href="#" className=" text-gray-700">
+                        <a href="#" className="text-gray-700">
                             Hindi
                         </a>
                     </div>
@@ -39,8 +70,7 @@ export default function Header() {
                     {/* LOGO + TITLE */}
                     <div className="flex h w-60 items-center gap-4">
                         {/* Logo */}
-                       <img src={image} alt="" />
-
+                        <img src={image} alt="" />
                     </div>
 
                     {/* NAV LINKS */}
@@ -52,30 +82,113 @@ export default function Header() {
                             Home
                         </a>
 
-                        <div className="flex items-center gap-1 cursor-pointer">
-                            About Us <span className="text-xs">▾</span>
+                        {/* About Us Dropdown */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => handleMouseEnter("about")}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <div className="flex items-center gap-1 cursor-pointer py-2">
+                                About Us <span className="text-xs">▾</span>
+                            </div>
+                            {openDropdown === "about" && (
+                                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
+                                    {dropdowns.about.map((item, index) => (
+                                        <a
+                                            key={index}
+                                            href={item.href}
+                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
                         </div>
 
                         <a href="#">Staff</a>
                         <a href="#">Faculty</a>
-                        <a href="#">Education</a>
+
+                        {/* Education Dropdown */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => handleMouseEnter("education")}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <div className="flex items-center gap-1 cursor-pointer py-2">
+                                Education <span className="text-xs">▾</span>
+                            </div>
+                            {openDropdown === "education" && (
+                                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
+                                    {dropdowns.education.map((item, index) => (
+                                        <a
+                                            key={index}
+                                            href={item.href}
+                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
                         <a href="#">Notices</a>
+
+                        {/* Contact Dropdown */}
+                        <div
+                            className="relative"
+                            onMouseEnter={() => handleMouseEnter("contact")}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <div className="flex items-center gap-1 cursor-pointer py-2">
+                                Contact <span className="text-xl">⬇</span>
+                            </div>
+                            {openDropdown === "contact" && (
+                                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
+                                    {dropdowns.contact.map((item, index) => (
+                                        <a
+                                            key={index}
+                                            href={item.href}
+                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
+                                        >
+                                            {item.name}
+                                        </a>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
 
                         <Search size={20} className="cursor-pointer" />
                     </nav>
 
                     {/* ACTION BUTTONS */}
-                    <div className="flex  items-center gap-4">
+                    <div className="flex items-center gap-4">
                         <button className="bg-[#0B5DBB] text-white px-6 py-3 rounded-full shadow-md hover:bg-blue-700 transition font-medium">
                             Patient Dashboard
                         </button>
 
-                        <button className="bg-[#0AA6C6] text-white px-6 py-3 rounded-full shadow-md hover:bg-cyan-600 transition font-medium">
-                            OPD Schedule
-                        </button>
+                       
                     </div>
                 </div>
             </div>
+
+            {/* Custom Animation Styles */}
+            <style jsx>{`
+                @keyframes fade-in {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                .animate-fade-in {
+                    animation: fade-in 0.2s ease-out forwards;
+                }
+            `}</style>
         </header>
     );
 }
