@@ -21,6 +21,9 @@ import Undergraduate from "./components/education/Undergraduate";
 import Postgraduate from "./components/education/Postgraduate";
 import Research from "./components/education/Research";
 import ContinuingEducation from "./components/education/ContinuingEducation";
+import Staff from "./components/staff/Staff";
+import FacultyPage from "./components/faculty/FacultyPage";
+import Notices from "./components/notices/Notices";
 
 export default function App() {
   return (
@@ -158,6 +161,33 @@ export default function App() {
           <>
             <Navbar />
             <ContinuingEducation />
+            <Footer />
+          </>
+        } />
+
+        {/* Staff Page */}
+        <Route path="/staff" element={
+          <>
+            <Navbar />
+            <Staff />
+            <Footer />
+          </>
+        } />
+
+        {/* Faculty Page */}
+        <Route path="/faculty" element={
+          <>
+            <Navbar />
+            <FacultyPage />
+            <Footer />
+          </>
+        } />
+
+        {/* Notices Page */}
+        <Route path="/notices" element={
+          <>
+            <Navbar />
+            <Notices />
             <Footer />
           </>
         } />

@@ -113,8 +113,8 @@ export default function Header() {
                             )}
                         </div>
 
-                        <a href="/about/history">Staff</a>
-                        <a href="/about/mission">Faculty</a>
+                        <a href="/staff">Staff</a>
+                        <a href="/faculty">Faculty</a>
 
                         {/* Education Dropdown */}
                         <div
@@ -140,7 +140,7 @@ export default function Header() {
                             )}
                         </div>
 
-                        <a href="/education/undergraduate">Notices</a>
+                        <a href="/notices">Notices</a>
 
                         {/* Contact Dropdown */}
                         <div
