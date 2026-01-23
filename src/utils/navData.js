@@ -1,32 +1,19 @@
 export const navLinks = [
+  { name: "Home", to: "/" },
   { name: "Staff", to: "/staff" },
-  { name: "Faculty", to: "/faculty" },
-  { name: "Notices", to: "/notices" },
+  { name: "Contact", to: "/contact" },
 ];
 
 export const dropdowns = {
-  about: {
-    label: "About Us",
-    items: [
-      { name: "History", to: "/about/history" },
-      { name: "Mission", to: "/about/mission" },
-      { name: "Facilities", to: "/about/facilities" },
-    ],
-  },
-  education: {
-    label: "Education",
-    items: [
-      { name: "Undergraduate Programs", to: "#" },
-      { name: "Postgraduate Courses", to: "#" },
-      { name: "Research Programs", to: "#" },
-      { name: "Continuing Education", to: "#" },
-    ],
-  },
-  contact: {
-    label: "Contact",
-    items: [
-      { name: "Contact Us", to: "contact" },
-      { name: "Location", to: "#" },
-    ],
-  },
+  "About Us": [
+    { name: "History", to: "/about/history" },
+    { name: "Mission", to: "/about/mission" },
+    { name: "Facilities", to: "/about/facilities" },
+  ],
+  "Education": [
+    { name: "Undergraduate Programs", to: "/education/undergraduate" },
+    { name: "Postgraduate Courses", to: "/education/postgraduate" },
+    { name: "Research Programs", to: "/education/research" },
+    { name: "Continuing Education", to: "/education/continuing" },
+  ],
 };

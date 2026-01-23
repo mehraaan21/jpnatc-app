@@ -5,7 +5,7 @@ export default function Awareness() {
         
         {/* SECTION HEADING */}
         <div className="flex items-center gap-4 mb-12">
-          <span className="w-10 h-[2px] bg-cyan-600"></span>
+          <span className="w-10 h-0.5 bg-cyan-600"></span>
           <h2 className="text-3xl font-semibold text-gray-900">
             Awareness Programme
           </h2>
@@ -20,11 +20,11 @@ export default function Awareness() {
               <img
                 src="https://images.unsplash.com/photo-1607746882042-944635dfe10e"
                 alt="Mental Hygiene"
-                className="w-full h-[300px] object-cover"
+                className="w-full h-75 object-cover"
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <button className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg">
-                  <span className="ml-1 border-l-[12px] border-l-white border-y-[8px] border-y-transparent"></span>
+                  <span className="ml-1 border-l-12 border-l-white border-y-8border-y-transparent"></span>
                 </button>
               </div>
             </div>
@@ -43,11 +43,11 @@ export default function Awareness() {
               <img
                 src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
                 alt="Inside JPNATC"
-                className="w-full h-[300px] object-cover"
+                className="w-full h-75 object-cover"
               />
               <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                 <button className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg">
-                  <span className="ml-1 border-l-[12px] border-l-white border-y-[8px] border-y-transparent"></span>
+                  <span className="ml-1 border-l-12 border-l-white border-y-8 border-y-transparent"></span>
                 </button>
               </div>
             </div>

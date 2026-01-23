@@ -41,7 +41,7 @@ export default function Faculty() {
               <img
                 src={item.img}
                 alt={item.name}
-                className="w-full h-[360px] object-cover"
+                className="w-full h-90 object-cover"
               />
             </div>
 

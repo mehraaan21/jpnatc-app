@@ -115,7 +115,7 @@ export default function Hero() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="relative w-full h-screen bg-gradient-to-br from-sky-100 to-cyan-200 overflow-hidden">
+      <section className="relative w-full h-screen bg-linear-to-br from-sky-100 to-cyan-200 overflow-hidden">
         {/* Hero Content - Flex Layout */}
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-24 flex items-center justify-between h-full">
           {/* Left Side: Text Content */}

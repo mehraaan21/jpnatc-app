@@ -1,40 +1,23 @@
 import { NavLink } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
 
-export default function NavDropdown({
-  label,
-  items,
-  isOpen,
-  onOpen,
-  onClose,
-  width = "w-48",
-}) {
+export default function NavDropdown({ label, items }) {
   return (
-    <div
-      className="relative"
-      onMouseEnter={onOpen}
-      onMouseLeave={onClose}
-    >
-      <button className="flex items-center gap-1 py-2 cursor-pointer">
-        {label}
-        <ChevronDown size={16} />
+    <div className="relative group">
+      <button className="flex items-center gap-1 px-2 py-1 hover:text-[#0B5DBB] transition font-medium">
+        {label} <span className="text-xs">▾</span>
       </button>
 
-      {isOpen && (
-        <div
-          className={`absolute top-full left-0 mt-1 ${width} bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade`}
-        >
-          {items.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.to}
-              className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition"
-            >
-              {item.name}
-            </NavLink>
-          ))}
-        </div>
-      )}
+      <div className="absolute top-full left-0 hidden group-hover:flex flex-col bg-white shadow-lg rounded-lg mt-2 w-48 animate-fade z-50">
+        {items.map(item => (
+          <NavLink
+            key={item.name}
+            to={item.to}
+            className="px-4 py-2 hover:bg-[#0AA6C6] hover:text-white transition"
+          >
+            {item.name}
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }

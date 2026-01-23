@@ -111,7 +111,7 @@ import { ArrowUpRight, MapPin, Phone, Printer, ArrowUp } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-gradient-to-br from-[#063a4d] via-[#0a5671] to-[#063a4d] text-white pt-20">
+    <footer className="relative bg-linear-to-br from-[#063a4d] via-[#0a5671] to-[#063a4d] text-white pt-20">
       
       {/* MAIN GRID - LEFT CENTER RIGHT LAYOUT */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12 relative z-10">
@@ -202,10 +202,10 @@ export default function Footer() {
           </div>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="group bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-black p-4 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-cyan-500/50 transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2"
+            className="group bg-linear-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 text-black p-4 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-cyan-500/50 transform hover:scale-105 hover:-translate-y-1 flex items-center gap-2"
             aria-label="Back to top"
           >
-            <ArrowUp size={20} className="group-hover:translate-y-[-2px] transition-transform" />
+            <ArrowUp size={20} className="group-hover:translate-y-0.5 transition-transform" />
             <span className="font-semibold hidden sm:inline">Back to Top</span>
           </button>
         </div>
