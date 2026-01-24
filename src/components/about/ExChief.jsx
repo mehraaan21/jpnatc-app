@@ -1,8 +1,8 @@
 export default function ExChief() {
     return (
         <div className="min-h-screen bg-gray-50 py-12">
-            <div className="max-w-7xl mx-auto px-4">
-                <h1 className="text-4xl font-bold text-[#0B5DBB] mb-4">Ex Chief</h1>
+            <div className="max-w-7xl mx-auto my-16 px-4">
+                <h1 className="text-4xl text-center font-bold text-[#0B5DBB] mb-4">Ex Chief</h1>
                 <div className="bg-white rounded-lg shadow-md p-8">
                     <p className="text-gray-600 mb-6">
                         We honor our former chiefs who have contributed significantly to the development 
@@ -36,5 +36,3 @@ export default function ExChief() {
         </div>
     );
 }
-
-export default ExChiefs;
