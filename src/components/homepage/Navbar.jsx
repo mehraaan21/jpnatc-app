@@ -1,28 +1,27 @@
-import { useState } from "react";
-import { Search } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
 import image from "../../assets/jpnatc_icon.png";
 
 export default function Header() {
     const [openDropdown, setOpenDropdown] = useState(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
     const dropdowns = {
         about: [
             { name: "History", href: "/about/history" },
             { name: "Mission", href: "/about/mission" },
             { name: "Aims And Objective", href: "/about/aims-and-objective" },
-             { name: "Facilities", href: "/about/facilities" },
-              { name: "Heirarchy", href: "/about/heirarchy" },
-               { name: "Photo Gallery", href: "/about/photo-gallery" },
-                { name: "IT Innovation", href: "/about/it-innovation" },
-                 { name: "Ex Chief", href: "/about/ex-chief" },
-
+            { name: "Facilities", href: "/about/facilities" },
+            { name: "Heirarchy", href: "/about/heirarchy" },
+            { name: "Photo Gallery", href: "/about/photo-gallery" },
+            { name: "IT Innovation", href: "/about/it-innovation" },
+            { name: "Ex Chief", href: "/about/ex-chief" },
         ],
         contact: [
             { name: "Contact Us", href: "/contact/contact-us" },
             { name: "Location", href: "/contact/location" },
             { name: "Right To Information", href: "/contact/right-to-information" },
-
-            
         ],
         education: [
             { name: "Undergraduate Programs", href: "/education/undergraduate" },
@@ -32,6 +31,14 @@ export default function Header() {
         ],
     };
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 20);
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     const handleMouseEnter = (dropdown) => {
         setOpenDropdown(dropdown);
     };
@@ -40,148 +47,159 @@ export default function Header() {
         setOpenDropdown(null);
     };
 
-    return (
-        <header className="w-full">
-            {/* ================= TOP BLUE BAR ================= */}
-            <div className="bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm">
-                <div className="max-w-7xl mx-auto px-4 h-10 flex items-center justify-between">
-                    {/* Left */}
-                    <div className="flex items-center gap-6">
-                        <span className="flex items-center gap-2">
-                            ☎ 011-26731237
-                        </span>
-                        <span className="flex items-center gap-2">
-                            ✉ jpnatcaiims2011@gmail.com
-                        </span>
-                    </div>
+    const navLinks = [
+        { name: "Home", href: "/" },
+        { name: "About Us", dropdown: "about" },
+        { name: "Staff", href: "/staff" },
+        { name: "Faculty", href: "/faculty" },
+        { name: "Education", dropdown: "education" },
+        { name: "Notices", href: "/notices" },
+        { name: "Contact", dropdown: "contact" },
+    ];
 
-                    {/* Right */}
-                    <div className="flex text-gray-700 items-center gap-4">
-                        <a href="#" className="text-gray-700">
-                            Old website version
-                        </a>
+    return (
+        <header className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            isScrolled ? "bg-white shadow-lg" : "bg-white"
+        }`}>
+            {/* ================= TOP INFO BAR ================= */}
+            <div className={`bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm transition-all duration-300 ${
+                isScrolled ? "h-0 overflow-hidden" : "h-10"
+            }`}>
+                <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+                    <div className="flex items-center gap-6">
+                        <span className="flex items-center gap-2">☎ 011-26731237</span>
+                        <span className="flex items-center gap-2">✉ jpnatcaiims2011@gmail.com</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                        <a href="#" className="hover:text-gray-200 transition">Old website version</a>
                         <span>|</span>
-                        <a href="#" className="text-gray-700">
-                            English
-                        </a>
-                        <a href="#" className="text-gray-700">
-                            Hindi
-                        </a>
+                        <a href="#" className="hover:text-gray-200 transition">English</a>
+                        <a href="#" className="hover:text-gray-200 transition">Hindi</a>
                     </div>
                 </div>
             </div>
 
             {/* ================= MAIN NAVBAR ================= */}
-            <div className="bg-white shadow-sm">
-                <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    {/* LOGO + TITLE */}
-                    <div className="flex h w-60 items-center gap-4">
-                        {/* Logo */}
-                        <img src={image} alt="" />
-                    </div>
+            <div className={`bg-white border-b border-[#0AA6C6] transition-all duration-300 ${
+                isScrolled ? "py-4" : "py-4"
+            }`}>
+                <div className="max-w-7xl mx-auto px-4  flex items-center justify-between">
+                    {/* LOGO */}
+                    <a href="/" className="flex items-center gap-3">
+                        <img src={image} alt="JPNATC" className={`transition-all duration-300 ${isScrolled ? "h-12" : "h-16"}`} />
+                    </a>
 
-                    {/* NAV LINKS */}
-                    <nav className="hidden lg:flex items-center gap-8 text-[17px] text-gray-800">
-                        <a
-                            href="#"
-                            className="text-[#0B5DBB] font-semibold border-b-2 border-[#0B5DBB]"
-                        >
-                            Home
-                        </a>
+                    {/* DESKTOP NAV */}
+                    <nav className="hidden lg:flex items-center gap-1">
+                        {navLinks.map((link, index) => (
+                            <div
+                                key={index}
+                                className="relative"
+                                onMouseEnter={() => link.dropdown && handleMouseEnter(link.dropdown)}
+                                onMouseLeave={handleMouseLeave}
+                            >
+                                {link.dropdown ? (
+                                    <div className="flex items-center gap-1 px-4 py-2 cursor-pointer text-gray-700 hover:text-[#0AA6C6] transition-colors font-medium">
+                                        {link.name}
+                                        <ChevronDown size={16} className={`transition-transform duration-200 ${openDropdown === link.dropdown ? "rotate-180" : ""}`} />
+                                    </div>
+                                ) : (
+                                    <a
+                                        href={link.href}
+                                        className="px-4 py-2 text-gray-700 hover:text-[#0AA6C6] transition-colors font-medium relative group"
+                                    >
+                                        {link.name}
+                                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#0AA6C6] transition-all duration-300 group-hover:w-full"></span>
+                                    </a>
+                                )}
 
-                        {/* About Us Dropdown */}
-                        <div
-                            className="relative"
-                            onMouseEnter={() => handleMouseEnter("about")}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <div className="flex items-center gap-1 cursor-pointer py-2">
-                                About Us <span className="text-xs">▾</span>
+                                {/* DROPDOWN */}
+                                {link.dropdown && openDropdown === link.dropdown && (
+                                    <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden animate-fade-in">
+                                        {dropdowns[link.dropdown]?.map((item, idx) => (
+                                            <a
+                                                key={idx}
+                                                href={item.href}
+                                                className="block px-4 py-3 text-gray-700 hover:bg-[#0AA6C6] hover:text-white transition-all duration-200 text-sm"
+                                            >
+                                                {item.name}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
-                            {openDropdown === "about" && (
-                                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
-                                    {dropdowns.about.map((item, index) => (
-                                        <a
-                                            key={index}
-                                            href={item.href}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
-                                        >
-                                            {item.name}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
+                        ))}
 
-                        <a href="/staff">Staff</a>
-                        <a href="/faculty">Faculty</a>
-
-                        {/* Education Dropdown */}
-                        <div
-                            className="relative"
-                            onMouseEnter={() => handleMouseEnter("education")}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <div className="flex items-center gap-1 cursor-pointer py-2">
-                                Education <span className="text-xs">▾</span>
-                            </div>
-                            {openDropdown === "education" && (
-                                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
-                                    {dropdowns.education.map((item, index) => (
-                                        <a
-                                            key={index}
-                                            href={item.href}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
-                                        >
-                                            {item.name}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        <a href="/notices">Notices</a>
-
-                        {/* Contact Dropdown */}
-                        <div
-                            className="relative"
-                            onMouseEnter={() => handleMouseEnter("contact")}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <div className="flex items-center gap-1 cursor-pointer py-2">
-                                Contact <span className="text-xs">▾</span>
-                            </div>
-                            {openDropdown === "contact" && (
-                                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 animate-fade-in">
-                                    {dropdowns.contact.map((item, index) => (
-                                        <a
-                                            key={index}
-                                            href={item.href}
-                                            className="block px-4 py-2 text-gray-700 hover:bg-[#0B5DBB] hover:text-white transition-colors duration-200"
-                                        >
-                                            {item.name}
-                                        </a>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-
-                        <Search size={20} className="cursor-pointer" />
-                    </nav>
-
-                    {/* ACTION BUTTONS */}
-                    <div className="flex items-center gap-4">
-                        <button className="bg-[#0B5DBB] text-white px-6 py-3 rounded-full shadow-md hover:bg-blue-700 transition font-medium">
-                            Patient Dashboard
+                        {/* SEARCH ICON */}
+                        <button className="ml-4 p-2 text-gray-600 hover:text-[#0AA6C6] transition-colors">
+                            <Search size={20} />
                         </button>
 
-                       
-                    </div>
+                        {/* PATIENT DASHBOARD BUTTON */}
+                        <a
+                            href="/patient-dashboard"
+                            className="ml-4 px-5 py-2.5 bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white rounded-lg font-medium hover:shadow-lg hover:shadow-[#0AA6C6]/30 transition-all duration-300"
+                        >
+                            Patient Dashboard
+                        </a>
+                    </nav>
+
+                    {/* MOBILE MENU BUTTON */}
+                    <button
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="lg:hidden p-2 text-gray-700"
+                    >
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                 </div>
             </div>
 
-            {/* Custom Animation Styles */}
-            <style jsx>{`
+            {/* ================= MOBILE MENU ================= */}
+            <div className={`lg:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
+                isMobileMenuOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+            }`}>
+                <div className="px-4 py-4 space-y-2">
+                    {navLinks.map((link, index) => (
+                        <div key={index}>
+                            {link.dropdown ? (
+                                <details className="group">
+                                    <summary className="flex items-center justify-between px-4 py-3 text-gray-700 cursor-pointer hover:bg-gray-50 rounded-lg font-medium">
+                                        {link.name}
+                                        <ChevronDown size={18} className="transition-transform group-open:rotate-180" />
+                                    </summary>
+                                    <div className="pl-4 mt-1 space-y-1">
+                                        {dropdowns[link.dropdown]?.map((item, idx) => (
+                                            <a
+                                                key={idx}
+                                                href={item.href}
+                                                className="block px-4 py-2 text-gray-600 hover:text-[#0AA6C6] text-sm"
+                                            >
+                                                {item.name}
+                                            </a>
+                                        ))}
+                                    </div>
+                                </details>
+                            ) : (
+                                <a
+                                    href={link.href}
+                                    className="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium"
+                                >
+                                    {link.name}
+                                </a>
+                            )}
+                        </div>
+                    ))}
+                    <a
+                        href="/patient-dashboard"
+                        className="block mx-4 mt-4 px-5 py-3 bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-center rounded-lg font-medium"
+                    >
+                        Patient Dashboard
+                    </a>
+                </div>
+            </div>
+
+            {/* Animation Styles */}
+            <style>{`
                 @keyframes fade-in {
                     from {
                         opacity: 0;

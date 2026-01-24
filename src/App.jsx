@@ -24,6 +24,7 @@ import ContinuingEducation from "./components/education/ContinuingEducation";
 import Staff from "./components/staff/Staff";
 import FacultyPage from "./components/faculty/FacultyPage";
 import Notices from "./components/notices/Notices";
+import PatientDashboard from "./components/patient/PatientDashboard";
 
 export default function App() {
   return (
@@ -188,6 +189,15 @@ export default function App() {
           <>
             <Navbar />
             <Notices />
+            <Footer />
+          </>
+        } />
+
+        {/* Patient Dashboard Page */}
+        <Route path="/patient-dashboard" element={
+          <>
+            <Navbar />
+            <PatientDashboard />
             <Footer />
           </>
         } />
