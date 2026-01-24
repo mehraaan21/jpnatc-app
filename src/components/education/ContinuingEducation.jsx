@@ -1,17 +1,29 @@
 export default function ContinuingEducation() {
     return (
-        <div className="min-h-screen bg-gray-50 py-12">
+        <div className="min-h-screen bg-[#eef7fa] py-16">
             <div className="max-w-7xl mx-auto px-4">
-                <h1 className="text-4xl font-bold text-[#0B5DBB] mb-4">Continuing Education</h1>
-                <div className="bg-white rounded-lg shadow-md p-8">
-                    <p className="text-gray-600 mb-6">
+                {/* Heading */}
+                <div className="text-center mb-14">
+                    <h2 className="text-4xl font-semibold text-gray-800">
+                        Continuing <span className="text-[#0AA6C6] font-bold">Education</span>
+                    </h2>
+                    <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg p-8 border-b-4 border-[#0AA6C6]">
+                    <p className="text-gray-600 mb-8 text-lg text-center max-w-2xl mx-auto">
                         We provide ongoing learning opportunities for healthcare professionals to 
                         update their skills and knowledge.
                     </p>
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-teal-50 p-6 rounded-lg">
-                            <h3 className="text-xl font-semibold text-teal-800 mb-3">Short-term Courses</h3>
-                            <ul className="space-y-2 text-gray-700">
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                        <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 bg-[#0AA6C6] rounded-lg flex items-center justify-center text-white">
+                                    📚
+                                </div>
+                                <h3 className="text-2xl font-semibold text-[#0AA6C6]">Short-term Courses</h3>
+                            </div>
+                            <ul className="space-y-3 text-gray-700 text-lg">
                                 <li>• Basic Life Support (BLS)</li>
                                 <li>• Advanced Cardiac Life Support (ACLS)</li>
                                 <li>• Infection Control Practices</li>
@@ -19,9 +31,14 @@ export default function ContinuingEducation() {
                                 <li>• Clinical Skill Enhancement</li>
                             </ul>
                         </div>
-                        <div className="bg-teal-50 p-6 rounded-lg">
-                            <h3 className="text-xl font-semibold text-teal-800 mb-3">Workshops & Seminars</h3>
-                            <ul className="space-y-2 text-gray-700">
+                        <div className="bg-gradient-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl">
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 bg-[#0AA6C6] rounded-lg flex items-center justify-center text-white">
+                                    🎯
+                                </div>
+                                <h3 className="text-2xl font-semibold text-[#0AA6C6]">Workshops & Seminars</h3>
+                            </div>
+                            <ul className="space-y-3 text-gray-700 text-lg">
                                 <li>• Quarterly Medical Conferences</li>
                                 <li>• Guest Lecture Series</li>
                                 <li>• Case Discussion Sessions</li>
@@ -29,9 +46,14 @@ export default function ContinuingEducation() {
                             </ul>
                         </div>
                     </div>
-                    <div className="mt-6 bg-orange-50 p-6 rounded-lg">
-                        <h3 className="text-xl font-semibold text-orange-800 mb-3">CME Credits</h3>
-                        <p className="text-gray-700">
+                    <div className="bg-gradient-to-br from-[#0AA6C6] to-cyan-600 text-white p-8 rounded-xl">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                                🎓
+                            </div>
+                            <h3 className="text-2xl font-semibold">CME Credits</h3>
+                        </div>
+                        <p className="text-cyan-100 text-lg leading-relaxed">
                             All our continuing education programs are accredited with CME credits 
                             recognized by the Medical Council of India. Participants will receive 
                             certificates upon completion.

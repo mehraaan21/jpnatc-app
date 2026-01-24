@@ -1,14 +1,14 @@
 export default function Awareness() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-[#eef7fa] py-20">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* SECTION HEADING */}
-        <div className="flex items-center gap-4 mb-12">
-          <span className="w-10 h-[2px] bg-cyan-600"></span>
-          <h2 className="text-3xl font-semibold text-gray-900">
-            Awareness Programme
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-semibold text-gray-800">
+            Awareness <span className="text-[#0AA6C6] font-bold">Programme</span>
           </h2>
+          <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
         </div>
 
         {/* VIDEO CARDS */}
