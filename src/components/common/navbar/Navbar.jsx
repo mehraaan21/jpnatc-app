@@ -13,6 +13,7 @@ export default function Navbar2() {
     { type: "link", name: "Home", to: "/" },
     { type: "dropdown", label: "About Us", items: dropdowns["About Us"] },
     { type: "dropdown", label: "Education", items: dropdowns["Education"] },
+    { type: "link", name: "Faculty", to: "/faculties" },
     { type: "link", name: "Staff", to: "/staff" },
     { type: "link", name: "Contact", to: "/contact" },
   ];

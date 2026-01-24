@@ -2,7 +2,7 @@ import { Phone, Mail, Globe } from "lucide-react";
 
 export default function TopBar() {
   return (
-    <div className="bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm px-4 py-2 flex justify-between items-center shadow-md">
+    <div className="hidden md:flex bg-gradient-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm px-4 py-2 justify-between items-center shadow-md">
       
       {/* Left info */}
       <div className="flex items-center gap-6">
@@ -22,6 +22,7 @@ export default function TopBar() {
         <a href="#" className="hover:underline">Hindi</a>
         <a href="#" className="hover:underline font-semibold">Old Website</a>
       </div>
+      
     </div>
   );
 }
