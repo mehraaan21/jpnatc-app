@@ -115,7 +115,7 @@ export default function Header() {
 
                                 {/* DROPDOWN */}
                                 {link.dropdown && openDropdown === link.dropdown && (
-                                    <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden animate-fade-in">
+                                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden animate-fade-in">
                                         {dropdowns[link.dropdown]?.map((item, idx) => (
                                             <a
                                                 key={idx}
