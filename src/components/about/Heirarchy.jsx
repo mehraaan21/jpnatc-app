@@ -1,112 +1,150 @@
-import React from 'react';
+import { useLayoutEffect, useRef } from "react";
+import { Building2, Stethoscope, Users, Award } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hierarchy = () => {
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
+  const dividerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      gsap.fromTo(
+        dividerRef.current,
+        { width: 0, opacity: 0 },
+        { width: "5rem", opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.3 }
+      );
+
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const hierarchyData = [
     {
       id: 1,
+      icon: <Building2 className="w-8 h-8" />,
       title: "Director",
+      subtitle: "Head of the Institution",
       description: "Head of the institution responsible for overall strategic vision and policy making.",
-      side: "left",
-      icon: "🏢",
+      color: "bg-blue-50 text-[#0B5DBB]"
     },
     {
       id: 2,
+      icon: <Stethoscope className="w-8 h-8" />,
       title: "Medical Superintendent",
+      subtitle: "Clinical Operations",
       description: "In-charge of clinical operations and maintaining the highest standards of patient care.",
-      side: "right",
-      icon: "🩺",
+      color: "bg-cyan-50 text-[#0AA6C6]"
     },
     {
       id: 3,
+      icon: <Users className="w-8 h-8" />,
       title: "Heads of Departments",
+      subtitle: "Senior Experts",
       description: "Senior experts leading specialized medical wings like Surgery, Trauma, and Anaesthesia.",
-      side: "left",
-      icon: "👨‍⚕️",
+      color: "bg-teal-50 text-teal-600"
     },
     {
       id: 4,
+      icon: <Award className="w-8 h-8" />,
       title: "Senior Residents",
+      subtitle: "Ward Operations",
       description: "Specialized medical professionals managing ward operations and emergency responses.",
-      side: "right",
-      icon: "🏥",
+      color: "bg-indigo-50 text-indigo-600"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-20 px-6 font-sans">
+    <section ref={containerRef} className="bg-[#eef7fa] py-20">
       {/* Header */}
-      <div className="text-center mb-20">
-        <h1 className="text-5xl font-black text-slate-900 mb-4 uppercase tracking-tighter">
-          Institutional <span className="text-blue-600">Hierarchy</span>
-        </h1>
-        <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <div ref={headingRef} className="text-center mb-14">
+          <h2 className="text-4xl font-semibold text-gray-800">
+            Institutional <span className="text-[#0AA6C6] font-bold">Hierarchy</span>
+          </h2>
+          <div 
+            ref={dividerRef}
+            className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"
+          ></div>
+          <p className="text-gray-600 mt-6 max-w-3xl mx-auto">
+            Our organizational structure ensures efficient management and quality healthcare delivery 
+            through a hierarchical system of experienced professionals.
+          </p>
+        </div>
       </div>
 
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 p-6">
-      <div className="relative group w-full max-w-lg p-5 mb-24">
-          {/* Background Glow */}
-          <div className="absolute inset-0 bg-blue-600 rounded-3xl blur-2xl opacity-10 group-hover:opacity-25 transition-opacity duration-500"></div>
-          
-          <div className="relative bg-white p-10 rounded-3xl shadow-2xl border-2 border-blue-100 transition-all duration-300 group-hover:-translate-y-2 text-center">
-            <div className="text-6xl mb-6 transform group-hover:scale-110 transition-transform">
-              🏢
-            </div>
-            <h2 className="text-3xl font-extrabold text-slate-900 mb-3 uppercase tracking-tight">Director</h2>
-            <p className="text-blue-600 font-bold mb-4">Head of the Institution</p>
-            <p className="text-slate-600 leading-relaxed font-medium">
-              Leading JPNATC with a vision for excellence in trauma care, innovation, and medical education at a global scale.
-            </p>
-            <div className="mt-6 h-1.5 w-24 bg-gradient-to-r from-blue-600 to-cyan-400 mx-auto rounded-full"></div>
-          </div>
-        </div>
-        </div>
-        
+      {/* Hierarchy Grid */}
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {hierarchyData.map((item, index) => (
+            <div 
+              key={item.id}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-[#0AA6C6]/20 border-b-4 hover:border-b-[#0AA6C6] p-8 group"
+            >
+              {/* Icon */}
+              <div className={`w-16 h-16 ${item.color} rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#0AA6C6] group-hover:text-white transition-colors duration-300`}>
+                {item.icon}
+              </div>
 
-      {/* Timeline Container */}
-      <div className="relative max-w-6xl mx-auto">
-        
-        
-        {/* The Central Vertical Line */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-600 via-cyan-400 to-transparent hidden md:block"></div>
-
-        <div className="space-y-12 md:space-y-0">
-          {hierarchyData.map((item, idx) => (
-            <div key={item.id} className={`relative flex items-center justify-between w-full mb-8 md:mb-12 ${
-              item.side === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'
-            }`}>
-              
-              {/* Spacer for desktop */}
-              <div className="hidden md:block w-5/12"></div>
-
-              {/* Central Number Circle */}
-              <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 flex items-center justify-center z-10">
-                <div className="w-12 h-12 bg-white border-4 border-blue-600 rounded-full flex items-center justify-center font-bold text-blue-600 shadow-xl ring-8 ring-slate-50">
+              {/* Content */}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="w-8 h-8 bg-[#0AA6C6] text-white rounded-full flex items-center justify-center text-sm font-bold">
                   {item.id}
-                </div>
+                </span>
               </div>
+              <h3 className="text-2xl font-bold text-gray-800 mb-1 group-hover:text-[#0AA6C6] transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-[#0AA6C6] font-medium mb-3">{item.subtitle}</p>
+              <p className="text-gray-600 leading-relaxed">
+                {item.description}
+              </p>
 
-              {/* Content Card */}
-              <div className={`w-full md:w-5/12 pl-16 md:pl-0 transition-all duration-1000 transform`}>
-                <div className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:shadow-2xl hover:-translate-y-2 transition-all group">
-                  <div className="text-4xl mb-4 transition-transform duration-300">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-800 mb-2">{item.title}</h3>
-                  <p className="text-slate-600 leading-relaxed font-medium">
-                    {item.description}
-                  </p>
-                  
-                  {/* Decorative modern bar */}
-                  <div className={`mt-4 h-1 w-12 rounded-full bg-gradient-to-r ${
-                    item.side === 'left' ? 'from-blue-600 to-cyan-400' : 'from-cyan-400 to-blue-600'
-                  }`}></div>
-                </div>
-              </div>
+              {/* Decorative bar */}
+              <div className="mt-6 h-1 w-16 bg-gradient-to-r from-[#0AA6C6] to-[#0B5DBB] rounded-full"></div>
             </div>
           ))}
         </div>
       </div>
-    </div>
+
+      {/* Decorative Element */}
+      <div className="max-w-7xl mx-auto px-6 mt-16">
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+          <div className="w-3 h-3 rounded-full bg-[#0AA6C6]"></div>
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+        </div>
+      </div>
+    </section>
   );
 };
 

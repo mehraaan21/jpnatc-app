@@ -3,7 +3,7 @@ import Navbar from "./components/homepage/Navbar";
 import Hero from "./components/homepage/Hero";
 import InfoCards from "./components/homepage/InfoCards";
 import Faculty from "./components/homepage/Faculty";
-import Awareness from "./components/homepage/ Awareness";
+import Awareness from "./components/homepage/Awareness";
 import Feedback from "./components/homepage/Feedback";
 import Footer from "./components/homepage/Footer";
 import History from "./components/about/History";

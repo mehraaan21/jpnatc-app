@@ -1,6 +1,51 @@
-import React from 'react';
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PhotoGallery = () => {
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
+  const dividerRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      gsap.fromTo(
+        dividerRef.current,
+        { width: 0, opacity: 0 },
+        { width: "5rem", opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.3 }
+      );
+
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, scale: 0.9 },
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const galleryItems = [
     { id: 1, title: "Main Building", subtitle: "Exterior View", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" },
     { id: 2, title: "Emergency Wing", subtitle: "24/7 Support", img: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=800" },
@@ -13,28 +58,31 @@ const PhotoGallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 py-20 px-4">
-      <div className="max-w-7xl mx-auto">
-        
-         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Photo <span className="text-blue-600">&</span> Gallery
-          </h1>
-            <div className="my-6 flex justify-center">
-            <div className="h-1.5 w-100 bg-blue-600 rounded-full"></div>
-          </div>
-          <p className="text-slate-500 text-lg max-auto mx-auto">
-          Explore our state-of-the-art facilities and dedicated medical environments at JPNATC.
+    <section ref={containerRef} className="bg-[#eef7fa] py-20">
+      {/* Header */}
+      <div className="max-w-7xl mx-auto px-6 mb-16">
+        <div ref={headingRef} className="text-center mb-14">
+          <h2 className="text-4xl font-semibold text-gray-800">
+            Photo <span className="text-[#0AA6C6] font-bold">&</span> Gallery
+          </h2>
+          <div 
+            ref={dividerRef}
+            className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"
+          ></div>
+          <p className="text-gray-600 mt-6 max-w-3xl mx-auto">
+            Explore our state-of-the-art facilities and dedicated medical environments at JPNATC.
           </p>
-        
         </div>
+      </div>
 
-        {/* Interactive Gallery Grid */}
+      {/* Gallery Grid */}
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {galleryItems.map((item) => (
+          {galleryItems.map((item, index) => (
             <div 
-              key={item.id} 
-              className="group relative h-80 rounded-3xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+              key={item.id}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="group relative h-72 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
               {/* Background Image */}
               <img 
@@ -43,37 +91,40 @@ const PhotoGallery = () => {
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
 
-              {/* Dark Overlay (Gradual) */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B5DBB]/90 via-[#0B5DBB]/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500"></div>
 
-              {/* Content Overlay (Centered/Modern) */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+              {/* Content */}
+              <div className="absolute inset-0 flex flex-col items-center justify-end p-6 text-center">
+                <h3 className="text-xl font-bold text-white mb-1 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                  {item.title}
+                </h3>
+                <p className="text-[#0AA6C6] text-sm font-medium uppercase tracking-wider transform translate-y-2 group-hover:translate-y-0 transition-transform delay-75">
+                  {item.subtitle}
+                </p>
                 
-                {/* Modern Glass Card that pops up on hover */}
-                <div className="translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl w-full">
-                  <h3 className="text-2xl font-bold text-white mb-1 tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-blue-200 text-sm font-semibold uppercase tracking-widest">
-                    {item.subtitle}
-                  </p>
-                  
-                  {/* Decorative line inside the glass */}
-                  <div className="mt-4 h-1 w-12 bg-blue-500 mx-auto rounded-full"></div>
-                </div>
-
+                {/* Decorative line */}
+                <div className="mt-3 h-1 w-12 bg-[#0AA6C6] rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300"></div>
               </div>
 
-              {/* Always visible identifier (Optional) */}
+              {/* Number badge */}
               <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30">
-                <span className="text-white text-[10px] font-bold uppercase tracking-widest">0{item.id}</span>
+                <span className="text-white text-xs font-bold uppercase tracking-widest">0{item.id}</span>
               </div>
             </div>
           ))}
         </div>
-
       </div>
-    </div>
+
+      {/* Decorative Element */}
+      <div className="max-w-7xl mx-auto px-6 mt-16">
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+          <div className="w-3 h-3 rounded-full bg-[#0AA6C6]"></div>
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+        </div>
+      </div>
+    </section>
   );
 };
 

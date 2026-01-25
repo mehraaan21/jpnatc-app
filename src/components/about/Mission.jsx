@@ -1,129 +1,164 @@
-import React from 'react';
+import { useLayoutEffect, useRef } from "react";
+import { Eye, Target, Heart, Award } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const MissionPage = ({ imageUrl, title }) => {
+gsap.registerPlugin(ScrollTrigger);
+
+const MissionPage = () => {
+  const containerRef = useRef(null);
+  const headingRef = useRef(null);
+  const dividerRef = useRef(null);
+  const imageRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: -30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+      );
+
+      gsap.fromTo(
+        dividerRef.current,
+        { width: 0, opacity: 0 },
+        { width: "5rem", opacity: 1, duration: 0.6, ease: "power2.out", delay: 0.3 }
+      );
+
+      gsap.fromTo(
+        imageRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 1, ease: "power2.out", delay: 0.4 }
+      );
+
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const values = [
+    {
+      icon: <Eye className="w-6 h-6" />,
+      title: "Our Vision",
+      desc: "To be a center of excellence in trauma care, medical education, and research at the national and international level.",
+      color: "text-[#0B5DBB]",
+      bg: "bg-blue-50"
+    },
+    {
+      icon: <Target className="w-6 h-6" />,
+      title: "Our Mission",
+      desc: "To provide accessible, affordable, and quality healthcare to all patients with compassion and dedication.",
+      color: "text-[#0AA6C6]",
+      bg: "bg-cyan-50"
+    },
+    {
+      icon: <Heart className="w-6 h-6" />,
+      title: "Our Values",
+      desc: "Compassion, integrity, excellence, and commitment to patient care guide everything we do.",
+      color: "text-rose-500",
+      bg: "bg-rose-50"
+    },
+    {
+      icon: <Award className="w-6 h-6" />,
+      title: "Our Commitment",
+      desc: "Continuous improvement in clinical outcomes through innovation, research, and training.",
+      color: "text-amber-500",
+      bg: "bg-amber-50"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-20">
-        <h1 className="text-5xl font-black text-slate-900 mb-4 uppercase tracking-tighter">
-          Our <span className="text-blue-600">Mission</span>
-        </h1>
-        <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-      </div>
+    <section ref={containerRef} className="bg-[#eef7fa]">
+      {/* Header Image Section */}
+      <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+        <img 
+          ref={imageRef}
+          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600" 
+          alt="JPNATC Campus"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B5DBB]/70 to-[#0AA6C6]/50"></div>
         
-        {/* SECTION 1: Modern Hover Image Card */}
-        <div className="flex justify-center items-center mb-20">
-          
-          <div className="group relative w-full max-auto h-[450px] cursor-pointer">
-            
-            {/* Background Glow Effect */}
-            <div className="absolute inset-0 bg-blue-500 rounded-3xl blur-2xl opacity-10 group-hover:opacity-30 transition-opacity duration-500"></div>
+        {/* Page Title */}
+        <div className="absolute bottom-0 left-0 right-0 p-8">
+          <div className="max-w-7xl mx-auto">
+            <h1 ref={headingRef} className="text-4xl md:text-5xl font-bold text-white">
+              Our <span className="text-[#0AA6C6]">Mission</span>
+            </h1>
+          </div>
+        </div>
+      </div>
 
-            {/* Main Animated Div */}
-            <div className="relative z-10 h-full w-full bg-white rounded-3xl overflow-hidden shadow-xl 
-                            border border-white transition-all duration-500 ease-out
-                            group-hover:z-50 group-hover:-translate-y-6 group-hover:shadow-2xl group-hover:scale-[1.02]">
-              
-              {/* Image Container */}
-              <div className="h-full w-full overflow-hidden">
-                <img 
-                  src={imageUrl || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"} 
-                  alt={title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-              </div>
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        {/* Divider */}
+        <div ref={dividerRef} className="h-1 bg-[#0AA6C6] rounded-full mb-12"></div>
 
-              {/* Glassmorphism Overlay */}
-              <div className="absolute bottom-0 w-full p-8 bg-white/40 backdrop-blur-lg border-t border-white/20
-                              translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                <h3 className="text-2xl font-bold text-slate-900">{title || "JPNATC Campus"}</h3>
-                <p className="text-slate-700 font-medium">Excellence in Trauma Care</p>
-              </div>
+        {/* Image Card */}
+        <div className="mb-16">
+          <div className="relative rounded-2xl overflow-hidden shadow-xl">
+            <img 
+              src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1200" 
+              alt="JPNATC Facility"
+              className="w-full h-[400px] object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B5DBB]/80 to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <p className="text-white text-xl font-semibold">Excellence in Trauma Care</p>
             </div>
           </div>
         </div>
 
-        {/* SECTION 2: Mission & Vision Content */}
-        <div className="space-y-12">
-        
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Vision Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-blue-200">
-              <div className="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 text-blue-600 text-2xl group-hover:scale-110 transition-transform">
-                👁️
+        {/* Values Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {values.map((item, index) => (
+            <div 
+              key={index}
+              ref={(el) => (cardsRef.current[index] = el)}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-[#0AA6C6]/20 border-b-4 hover:border-b-[#0AA6C6] p-8 group"
+            >
+              {/* Icon */}
+              <div className={`w-14 h-14 ${item.bg} rounded-2xl flex items-center justify-center mb-6 ${item.color} group-hover:bg-[#0AA6C6] group-hover:text-white transition-colors duration-300`}>
+                {item.icon}
               </div>
-              <h3 className="text-2xl font-bold text-[#0B5DBB] mb-4">Our Vision</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To be a center of excellence in trauma care, medical education, 
-                and research at the national and international level.
+
+              {/* Content */}
+              <h3 className="text-2xl font-bold text-gray-800 mb-4 group-hover:text-[#0AA6C6] transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {item.desc}
               </p>
             </div>
-
-            {/* Mission Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-green-200">
-              <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl group-hover:scale-110 transition-transform">
-                🎯
-              </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-4">Our Mission</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To provide accessible, affordable, and quality healthcare to all 
-                patients with compassion and dedication.
-              </p>
-            </div>
-
-             {/* Mission Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-green-200">
-              <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl group-hover:scale-110 transition-transform">
-                🎯
-              </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-4">Our Mission</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To provide accessible, affordable, and quality healthcare to all 
-                patients with compassion and dedication.
-              </p>
-            </div>
-
-             {/* Mission Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-green-200">
-              <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl group-hover:scale-110 transition-transform">
-                🎯
-              </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-4">Our Mission</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To provide accessible, affordable, and quality healthcare to all 
-                patients with compassion and dedication.
-              </p>
-            </div>
-
-
-             {/* Mission Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-green-200">
-              <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl group-hover:scale-110 transition-transform">
-                🎯
-              </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-4">Our Mission</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To provide accessible, affordable, and quality healthcare to all 
-                patients with compassion and dedication.
-              </p>
-            </div>
-             {/* Mission Card */}
-            <div className="group bg-white p-10 rounded-3xl shadow-sm border border-slate-100 transition-all hover:shadow-md hover:border-green-200">
-              <div className="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center mb-6 text-green-600 text-2xl group-hover:scale-110 transition-transform">
-                🎯
-              </div>
-              <h3 className="text-2xl font-bold text-green-800 mb-4">Our Mission</h3>
-              <p className="text-slate-600 leading-relaxed text-lg">
-                To provide accessible, affordable, and quality healthcare to all 
-                patients with compassion and dedication.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
 
+        {/* Decorative Element */}
+        <div className="mt-16 flex items-center justify-center gap-4">
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+          <div className="w-3 h-3 rounded-full bg-[#0AA6C6]"></div>
+          <div className="h-px flex-1 bg-[#0AA6C6]/30"></div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
