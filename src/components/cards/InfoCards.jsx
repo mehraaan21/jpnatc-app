@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from "react";
 import {
   Building2,
   CalendarDays,
@@ -6,17 +7,76 @@ import {
   Award,
   PhoneCall,
 } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MoreAbout() {
+  const containerRef = useRef(null);
+  const cardsRef = useRef([]);
+  const headingRef = useRef(null);
+  const dividerRef = useRef(null);
+  const cardsContainerRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // First animate heading
+      gsap.fromTo(
+        headingRef.current,
+        { opacity: 0, y: -30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+
+      // Then animate divider line
+      gsap.fromTo(
+        dividerRef.current,
+        { width: 0, opacity: 0 },
+        {
+          width: "5rem",
+          opacity: 1,
+          duration: 0.6,
+          ease: "power2.out",
+          delay: 0.3,
+        }
+      );
+
+      // Then animate cards one by one
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 80 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: cardsContainerRef.current,
+            start: "top 80%",
+            end: "bottom 60%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
   const cards = [
     {
       title: "Departments",
       desc:
         "Orthopedics, Anesthesia & CC, Emergency Medicine, Neurosurgery, and specialized trauma units.",
-      color: "border-b-[#0B5DBB]",
-      linkColor: "text-[#0B5DBB]",
-      iconBg: "bg-blue-50",
-      iconColor: "text-[#0B5DBB]",
+      color: "border-b-[#0AA6C6]",
+      linkColor: "text-[#0AA6C6]",
+      iconBg: "bg-cyan-50",
+      iconColor: "text-[#0AA6C6]",
       icon: <Building2 />,
     },
     {
@@ -33,20 +93,20 @@ export default function MoreAbout() {
       title: "RTI Online",
       desc:
         "Right to Information Application for any Indian citizen as per the institutional guidelines and policies.",
-      color: "border-b-[#FF7A45]",
-      linkColor: "text-[#FF7A45]",
-      iconBg: "bg-orange-50",
-      iconColor: "text-[#FF7A45]",
+      color: "border-b-[#0AA6C6]",
+      linkColor: "text-[#0AA6C6]",
+      iconBg: "bg-cyan-50",
+      iconColor: "text-[#0AA6C6]",
       icon: <FileText />,
     },
     {
       title: "Courses",
       desc:
         "Conducted Training and specialized trauma courses for doctors and nursing staff nationwide.",
-      color: "border-b-[#0B5DBB]",
-      linkColor: "text-[#0B5DBB]",
-      iconBg: "bg-blue-50",
-      iconColor: "text-[#0B5DBB]",
+      color: "border-b-[#0AA6C6]",
+      linkColor: "text-[#0AA6C6]",
+      iconBg: "bg-cyan-50",
+      iconColor: "text-[#0AA6C6]",
       icon: <GraduationCap />,
     },
     {
@@ -63,32 +123,35 @@ export default function MoreAbout() {
       title: "Call Centre",
       desc:
         "24/7 reception desk managing enquiries and appointments for patient convenience.",
-      color: "border-b-[#FF7A45]",
-      linkColor: "text-[#FF7A45]",
-      iconBg: "bg-orange-50",
-      iconColor: "text-[#FF7A45]",
+      color: "border-b-[#0AA6C6]",
+      linkColor: "text-[#0AA6C6]",
+      iconBg: "bg-cyan-50",
+      iconColor: "text-[#0AA6C6]",
       icon: <PhoneCall />,
     },
   ];
 
   return (
-    <section className="bg-white
-      py-20">
+    <section ref={containerRef} className="bg-[#eef7fa] py-20">
       {/* ================= HEADING ================= */}
-      <div className="text-center mb-14">
+      <div ref={headingRef} className="text-center mb-14">
         <h2 className="text-4xl font-semibold text-gray-800">
           More About{" "}
-          <span className="text-[#0B5DBB] font-bold">JPNATC</span>
+          <span className="text-[#0AA6C6] font-bold">JPNATC</span>
         </h2>
-        <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
+        <div
+          ref={dividerRef}
+          className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"
+        ></div>
       </div>
 
       {/* ================= GRID ================= */}
-      <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div ref={cardsContainerRef} className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {cards.map((item, index) => (
           <div
             key={index}
-            className={`bg-white rounded-2xl p-8  border-b-4 ${item.color} shadow-sm hover:shadow-md transition`}
+            ref={(el) => (cardsRef.current[index] = el)}
+            className={` border border-[#0AA6C6] rounded-2xl p-8  border-b-4 ${item.color} shadow-sm hover:shadow-md transition`}
           >
             {/* ICON */}
             <div
@@ -98,12 +161,12 @@ export default function MoreAbout() {
             </div>
 
             {/* TITLE */}
-            <h3 className="text-xl font-semibold text-gray-800 mb-4">
+            <h3 className="text-2xl font-semibold text-gray-800 mb-2">
               {item.title}
             </h3>
 
             {/* DESCRIPTION */}
-            <p className="text-gray-600 text-sm leading-relaxed mb-6">
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">
               {item.desc}
             </p>
 

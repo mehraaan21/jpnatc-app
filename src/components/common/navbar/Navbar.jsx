@@ -1,107 +1,216 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
-import TopBar from "./TopBar";
-import NavDropdown from "./NavDropdown";
-import { navLinks, dropdowns } from "../../../utils/navData";
-import logo from "../../../assets/jpnatc_icon.png";
+import { useState, useEffect } from "react";
+import { Search, Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
+import image from "../../../assets/jpnatc_icon.png";
 
-export default function Navbar2() {
-  const [mobileOpen, setMobileOpen] = useState(false);
+export default function Header() {
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
-  const navOrder = [
-    { type: "link", name: "Home", to: "/" },
-    { type: "dropdown", label: "About Us", items: dropdowns["About Us"] },
-    { type: "dropdown", label: "Education", items: dropdowns["Education"] },
-    { type: "link", name: "Faculty", to: "/faculties" },
-    { type: "link", name: "Staff", to: "/staff" },
-    { type: "link", name: "Contact", to: "/contact" },
-  ];
+    const dropdowns = {
+        about: [
+            { name: "History", href: "/about/history" },
+            { name: "Mission", href: "/about/mission" },
+            { name: "Aims And Objective", href: "/about/aims-and-objective" },
+            { name: "Facilities", href: "/about/facilities" },
+            { name: "Heirarchy", href: "/about/heirarchy" },
+            { name: "Photo Gallery", href: "/about/photo-gallery" },
+            { name: "IT Innovation", href: "/about/it-innovation" },
+            { name: "Ex Chief", href: "/about/ex-chief" },
+        ],
+        education: [
+            { name: "Undergraduate Programs", href: "/education/undergraduate" },
+            { name: "Postgraduate Courses", href: "/education/postgraduate" },
+            { name: "Research Programs", href: "/education/research" },
+            { name: "Continuing Education", href: "/education/continuing-education" },
+        ],
+        contact: [
+            { name: "Contact Us", href: "/contact/contact-us" },
+            { name: "Location", href: "/contact/location" },
+            { name: "Right To Information", href: "/contact/right-to-information" },
+        ],
+    };
 
-  return (
-    <header className="w-full sticky top-0 z-50 bg-white shadow-md">
-      <TopBar />
+    useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Logo Left */}
-        <NavLink to="/" className="flex items-center gap-2">
-          <img src={logo} alt="JPNATC" className="h-14" />
-        </NavLink>
+    const navLinks = [
+        { name: "Home", href: "/" },
+        { name: "About Us", dropdown: "about" },
+        { name: "Staff", href: "/staff" },
+        { name: "Faculty", href: "/faculties" },
+        { name: "Education", dropdown: "education" },
+        { name: "Notices", href: "/notices" },
+        { name: "Contact", dropdown: "contact" },
+    ];
 
-        {/* Center Links */}
-        <nav className="hidden lg:flex items-center gap-6 font-medium text-gray-700">
-          {navOrder.map((item, idx) =>
-            item.type === "link" ? (
-              <NavLink
-                key={idx}
-                to={item.to}
-                className="px-2 py-1 hover:text-[#0B5DBB] transition"
-              >
-                {item.name}
-              </NavLink>
-            ) : (
-              <NavDropdown key={idx} label={item.label} items={item.items} />
-            )
-          )}
-        </nav>
+    return (
+        <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+            {/* ================= NAVBAR ================= */}
+            <div className="border-b border-[#0AA6C6]">
+                <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+                    
+                    {/* LOGO */}
+                    <Link to="/">
+                        <img
+                            src={image}
+                            alt="JPNATC"
+                            className={`transition-all duration-300 ${
+                                isScrolled ? "h-12" : "h-16"
+                            }`}
+                        />
+                    </Link>
 
-        {/* Right CTA + Mobile toggle */}
-        <div className="flex items-center gap-4">
-          <NavLink
-            to="/patient-dashboard"
-            className="hidden lg:inline-block bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] px-5 py-2 rounded-full text-white hover:scale-105 transition"
-          >
-            Patient Dashboard
-          </NavLink>
+                    {/* DESKTOP NAV */}
+                    <nav className="hidden lg:flex items-center gap-1">
+                        {navLinks.map((link, index) => (
+                            <div
+                                key={index}
+                                className="relative"
+                                onMouseEnter={() =>
+                                    link.dropdown && setOpenDropdown(link.dropdown)
+                                }
+                            >
+                                {link.dropdown ? (
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setOpenDropdown(
+                                                openDropdown === link.dropdown
+                                                    ? null
+                                                    : link.dropdown
+                                            )
+                                        }
+                                        className="flex items-center gap-1 px-4 py-2
+                                                   font-medium text-gray-700 hover:text-[#0AA6C6]"
+                                    >
+                                        {link.name}
+                                        <ChevronDown
+                                            size={16}
+                                            className={`transition-transform ${
+                                                openDropdown === link.dropdown
+                                                    ? "rotate-180"
+                                                    : ""
+                                            }`}
+                                        />
+                                    </button>
+                                ) : (
+                                    <Link
+                                        to={link.href}
+                                        className="px-4 py-2 font-medium text-gray-700 hover:text-[#0AA6C6]"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                )}
 
-          <button
-            className="lg:hidden p-2 rounded-md hover:bg-gray-100"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
+                                {/* DROPDOWN */}
+                                {link.dropdown &&
+                                    openDropdown === link.dropdown && (
+                                        <div
+                                            onMouseLeave={() =>
+                                                setOpenDropdown(null)
+                                            }
+                                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2
+                                                       min-w-55 bg-white rounded-xl shadow-xl
+                                                       border border-gray-100 py-2 z-50"
+                                        >
+                                            {dropdowns[link.dropdown].map(
+                                                (item, idx) => (
+                                                    <Link
+                                                        key={idx}
+                                                        to={item.href}
+                                                        onClick={() =>
+                                                            setOpenDropdown(null)
+                                                        }
+                                                        className="block px-4 py-3 text-sm text-gray-700
+                                                                   hover:bg-[#0AA6C6] hover:text-white transition"
+                                                    >
+                                                        {item.name}
+                                                    </Link>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                            </div>
+                        ))}
 
-      {/* Mobile Menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200 shadow-md">
-          <div className="flex flex-col px-4 py-4 gap-2">
-            {navOrder.map((item, idx) =>
-              item.type === "link" ? (
-                <NavLink
-                  key={idx}
-                  to={item.to}
-                  onClick={() => setMobileOpen(false)}
-                  className="py-2 hover:text-[#0B5DBB]"
-                >
-                  {item.name}
-                </NavLink>
-              ) : (
-                <div key={idx} className="flex flex-col">
-                  <span className="font-semibold py-2">{item.label}</span>
-                  {item.items.map(sub => (
-                    <NavLink
-                      key={sub.name}
-                      to={sub.to}
-                      onClick={() => setMobileOpen(false)}
-                      className="pl-4 py-1 hover:text-[#0B5DBB]"
+                        <button className="ml-4 p-2 text-gray-600 hover:text-[#0AA6C6]">
+                            <Search size={20} />
+                        </button>
+
+                        <Link
+                            to="/patient-dashboard"
+                            className="ml-4 px-5 py-2.5 bg-linear-to-r
+                                       from-[#0B5DBB] to-[#0AA6C6]
+                                       text-white rounded-lg font-medium"
+                        >
+                            Patient Dashboard
+                        </Link>
+                    </nav>
+
+                    {/* MOBILE BUTTON */}
+                    <button
+                        className="lg:hidden"
+                        onClick={() =>
+                            setIsMobileMenuOpen(!isMobileMenuOpen)
+                        }
                     >
-                      {sub.name}
-                    </NavLink>
-                  ))}
+                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
                 </div>
-              )
-            )}
-            <NavLink
-              to="/patient-dashboard"
-              className="bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] px-4 py-2 rounded-full text-white text-center mt-2"
+            </div>
+
+            {/* ================= MOBILE MENU ================= */}
+            <div
+                className={`lg:hidden transition-all duration-300 overflow-hidden ${
+                    isMobileMenuOpen ? "max-h-150" : "max-h-0"
+                }`}
             >
-              Patient Dashboard
-            </NavLink>
-          </div>
-        </div>
-      )}
-    </header>
-  );
+                <div className="px-4 py-4 space-y-2">
+                    {navLinks.map((link, index) => (
+                        <div key={index}>
+                            {link.dropdown ? (
+                                <details>
+                                    <summary className="flex justify-between px-4 py-3 font-medium cursor-pointer">
+                                        {link.name}
+                                        <ChevronDown size={18} />
+                                    </summary>
+                                    <div className="pl-4">
+                                        {dropdowns[link.dropdown].map(
+                                            (item, idx) => (
+                                                <Link
+                                                    key={idx}
+                                                    to={item.href}
+                                                    onClick={() =>
+                                                        setIsMobileMenuOpen(false)
+                                                    }
+                                                    className="block px-4 py-2 text-sm"
+                                                >
+                                                    {item.name}
+                                                </Link>
+                                            )
+                                        )}
+                                    </div>
+                                </details>
+                            ) : (
+                                <Link
+                                    to={link.href}
+                                    onClick={() =>
+                                        setIsMobileMenuOpen(false)
+                                    }
+                                    className="block px-4 py-3 font-medium"
+                                >
+                                    {link.name}
+                                </Link>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </header>
+    );
 }
