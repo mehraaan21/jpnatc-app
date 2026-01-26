@@ -62,7 +62,7 @@ export default function Header() {
             isScrolled ? "bg-white shadow-lg" : "bg-white"
         }`}>
             {/* ================= TOP INFO BAR ================= */}
-            <div className={`bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm transition-all duration-300 ${
+            {/* <div className={`bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm transition-all duration-300 ${
                 isScrolled ? "h-0 overflow-hidden" : "h-10"
             }`}>
                 <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
@@ -77,7 +77,7 @@ export default function Header() {
                         <a href="#" className="hover:text-gray-200 transition">Hindi</a>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* ================= MAIN NAVBAR ================= */}
             <div className={`bg-white border-b border-[#0AA6C6] transition-all duration-300 ${
