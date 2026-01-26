@@ -1,4 +1,5 @@
 import { ArrowRight, Phone, Calendar } from "lucide-react";
+import fac1 from "../../assets/fac1.jpg";
 
 export default function Hero() {
   return (
@@ -68,65 +69,71 @@ export default function Hero() {
       <div className="relative -mt-40 z-20 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Notices Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 border-b-4 border border-[#0AA6C6] hover:shadow-2xl transition-shadow duration-300">
+          <div className="bg-white rounded-2xl shadow-xl p-6 border-b-4 border border-[#0AA6C6] hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[#0AA6C6] font-semibold text-lg flex items-center gap-2">
+              <h3 className="text-[#0AA6C6] font-semibold text-lg flex items-center gap-2 group-hover:scale-105 transition-transform duration-300">
                 📢 Notices & Circulars
               </h3>
-              <span className="text-[#0AA6C6] text-sm font-medium cursor-pointer hover:underline">
+              <span className="text-[#0AA6C6] text-sm font-medium cursor-pointer hover:underline hover:text-[#0891b2] transition-colors">
                 View All
               </span>
             </div>
             <div className="space-y-4">
-              <div className="pb-3 border-b border-gray-100">
-                <p className="font-medium text-gray-800 text-sm hover:text-[#0AA6C6] cursor-pointer transition-colors">
+              <div className="pb-3 border-b border-gray-100 group-hover:border-gray-200 transition-colors">
+                <p className="font-medium text-gray-800 text-sm hover:text-[#0AA6C6] cursor-pointer transition-colors group-hover:text-[#0AA6C6]">
                   Precautions against Fire incidents at AIIMS – ADVISORY
                 </p>
                 <span className="text-gray-400 text-xs">Oct 12, 2023</span>
               </div>
-              <div>
-                <p className="font-medium text-gray-800 text-sm hover:text-[#0AA6C6] cursor-pointer transition-colors">
+              <div className="pb-3 border-b border-gray-100 group-hover:border-gray-200 transition-colors">
+                <p className="font-medium text-gray-800 text-sm hover:text-[#0AA6C6] cursor-pointer transition-colors group-hover:text-[#0AA6C6]">
                   Update on New Patient Registration Portal Guidelines
                 </p>
                 <span className="text-gray-400 text-xs">Oct 10, 2023</span>
+              </div>
+              <div>
+                <p className="font-medium text-gray-800 text-sm hover:text-[#0AA6C6] cursor-pointer transition-colors group-hover:text-[#0AA6C6]">
+                  National Trauma Center Annual Report 2023 Released
+                </p>
+                <span className="text-gray-400 text-xs">Oct 05, 2023</span>
               </div>
             </div>
           </div>
 
           {/* Appointment Card */}
-          <div className="bg-gradient-to-br from-[#0B5DBB] to-[#0AA6C6] rounded-2xl shadow-xl p-8 text-white text-center hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
-            <div className="bg-white/20 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-              <Calendar size={32} />
+          <div className="bg-gradient-to-br from-[#0B5DBB] to-[#0AA6C6] rounded-2xl shadow-xl p-8 text-white text-center hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
+            <div className="bg-white/20 rounded-full p-4 w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 group-hover:bg-white/30 transition-all duration-300">
+              <Calendar size={32} className="group-hover:rotate-3 transition-transform duration-300" />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Book Appointment</h3>
-            <p className="text-white/80 text-sm mb-4">अपॉइंटमेंट के लिए कॉल करें</p>
-            <p className="text-3xl font-bold mb-6">011-26731237</p>
-            <button className="w-full bg-white text-[#0AA6C6] font-semibold py-3 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+            <h3 className="text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300">Book Appointment</h3>
+            <p className="text-white/80 text-sm mb-4 group-hover:text-white transition-colors">अपॉइंटमेंट के लिए कॉल करें</p>
+            <p className="text-3xl font-bold mb-6 group-hover:scale-110 transition-transform duration-300">011-26731237</p>
+            <button className="w-full bg-white text-[#0AA6C6] font-semibold py-3 rounded-lg hover:bg-gray-100 hover:scale-[1.02] transition-all duration-300 group-hover:shadow-lg">
               Online Registration
             </button>
           </div>
 
           {/* Head Message Card */}
-          <div className="bg-white rounded-2xl shadow-xl p-6 border-b-4 border border-[#0AA6C6] hover:shadow-2xl transition-shadow duration-300">
-            <div className="flex gap-4">
+          <div className="bg-white rounded-2xl shadow-xl p-6 border-b-4 border border-[#0AA6C6] hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transition-all duration-300 cursor-pointer group">
+            <div className="flex flex-col items-center">
               <img
-                src="https://ui-avatars.com/api/?name=Prof+Kamran+Farooque&background=0AA6C6&color=fff&size=128"
+                src={fac1}
                 alt="Prof. Kamran Farooque"
-                className="w-16 h-16 rounded-full object-cover border-2 border-[#0AA6C6]"
+                className="w-24 h-24 rounded-full object-cover border-4 border-[#0AA6C6] mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300"
               />
               <div>
-                <span className="text-[#0AA6C6] text-xs font-semibold uppercase tracking-wide">
+                <span className="text-[#0AA6C6] text-xs font-semibold uppercase tracking-wide group-hover:scale-105 transition-transform duration-300">
                   Head of JPNATC
                 </span>
-                <h3 className="font-semibold text-lg text-gray-800">
+                <h3 className="font-semibold text-lg text-gray-800 group-hover:text-[#0AA6C6] transition-colors duration-300">
                   Prof. Kamran Farooque
                 </h3>
-                <p className="text-gray-600 text-sm mt-1 line-clamp-2">
+                <p className="text-gray-600 text-sm mt-1 line-clamp-2 group-hover:text-gray-700 transition-colors">
                   Vision: An India where anybody who suffers from Trauma or its
                   consequences is provided high quality care...
                 </p>
-                <button className="text-[#0AA6C6] text-sm font-medium mt-2 hover:underline">
-                  Read Message →
+                <button className="text-[#0AA6C6] text-sm font-medium mt-2 hover:underline hover:text-[#0891b2] transition-colors group-hover:gap-2 inline-flex items-center gap-1">
+                  Read Message <span className="transform group-hover:translate-x-1 transition-transform">→</span>
                 </button>
               </div>
             </div>

@@ -50,22 +50,22 @@ export default function Faculty() {
     {
       name: "Prof. Kamran Farooque",
       role: "Chief, JPNATC & Head, Orthopaedic",
-      img: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop",
+      img: "/src/assets/fac1.jpg",
     },
     {
       name: "Prof. Vijay Sharma",
-      role: "Professor, Orthopaedic",
-      img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop",
+      role: "Professor",
+      img: "/src/assets/fac2.jpg",
     },
     {
       name: "Prof. Vivek Trikha",
-      role: "Professor, Orthopaedic",
-      img: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop",
+      role: "Professor",
+      img: "/src/assets/fac3.jpg",
     },
     {
       name: "Prof. Buddhadev Chowdhury",
-      role: "Professor, Trauma Surgery",
-      img: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&h=400&fit=crop",
+      role: "Professor",
+      img: "/src/assets/fac4.jpg",
     },
   ];
 
@@ -113,6 +113,13 @@ export default function Faculty() {
             </p>
           </div>
         ))}
+      </div>
+
+      {/* ===== View More Button ===== */}
+      <div className="text-center mt-12">
+        <button className="px-8 py-3 bg-[#0AA6C6] text-white cursor-pointer font-semibold rounded-full hover:bg-[#0885a8] transition-colors duration-300 shadow-md hover:shadow-lg">
+          View More
+        </button>
       </div>
     </section>
   );

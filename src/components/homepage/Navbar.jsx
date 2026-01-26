@@ -62,22 +62,6 @@ export default function Header() {
             isScrolled ? "bg-white shadow-lg" : "bg-white"
         }`}>
             {/* ================= TOP INFO BAR ================= */}
-            {/* <div className={`bg-linear-to-r from-[#0B5DBB] to-[#0AA6C6] text-white text-sm transition-all duration-300 ${
-                isScrolled ? "h-0 overflow-hidden" : "h-10"
-            }`}>
-                <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
-                    <div className="flex items-center gap-6">
-                        <span className="flex items-center gap-2">☎ 011-26731237</span>
-                        <span className="flex items-center gap-2">✉ jpnatcaiims2011@gmail.com</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <a href="#" className="hover:text-gray-200 transition">Old website version</a>
-                        <span>|</span>
-                        <a href="#" className="hover:text-gray-200 transition">English</a>
-                        <a href="#" className="hover:text-gray-200 transition">Hindi</a>
-                    </div>
-                </div>
-            </div> */}
 
             {/* ================= MAIN NAVBAR ================= */}
             <div className={`bg-white border-b border-[#0AA6C6] transition-all duration-300 ${
@@ -115,7 +99,7 @@ export default function Header() {
 
                                 {/* DROPDOWN */}
                                 {link.dropdown && openDropdown === link.dropdown && (
-                                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden animate-fade-in">
+                                    <div className="absolute top-full left-0 -mt-2 cursor-pointer w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden animate-fade-in">
                                         {dropdowns[link.dropdown]?.map((item, idx) => (
                                             <a
                                                 key={idx}

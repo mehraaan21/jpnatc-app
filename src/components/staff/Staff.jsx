@@ -1,7 +1,26 @@
-import { useLayoutEffect, useRef } from "react";
-import { Building2, Users, Stethoscope, Activity } from "lucide-react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  Building2,
+  Users,
+  Stethoscope,
+  Activity,
+  HeartPulse,
+  Brain,
+  Microscope,
+  Shield,
+  Truck,
+  Settings,
+  FileText,
+  Droplets,
+  Flame,
+  Hotel,
+  Laptop,
+  ClipboardList,
+  Syringe
+} from "lucide-react";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,6 +29,8 @@ const Staff = () => {
   const cardsRef = useRef([]);
   const headingRef = useRef(null);
   const dividerRef = useRef(null);
+  const [visibleCards, setVisibleCards] = useState(9);
+  const ITEMS_PER_PAGE = 9;
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -61,78 +82,81 @@ const Staff = () => {
     return () => ctx.revert();
   }, []);
 
+  const handleViewMore = () => {
+    setVisibleCards((prev) => prev + ITEMS_PER_PAGE);
+  };
+
   const departments = [
-    { 
-      icon: <Building2 className="w-6 h-6" />, 
-      title: "Emergency Medicine", 
-      desc: "24/7 critical care services with specialized trauma response team",
-      link: "More Info",
-      count: "45 Staff"
-    },
-    { 
-      icon: <Stethoscope className="w-6 h-6" />, 
-      title: "Hospital Administration", 
-      desc: "Management of hospital operations and patient services",
-      link: "More Info",
-      count: "32 Staff"
-    },
-    { 
-      icon: <Activity className="w-6 h-6" />, 
-      title: "ICU Complex (TC3)", 
-      desc: "Specialized care for multi-trauma and critical patients",
-      link: "More Info",
-      count: "68 Staff"
-    },
-    { 
-      icon: <Building2 className="w-6 h-6" />, 
-      title: "Neurosurgery", 
-      desc: "Expert management of brain and spinal cord injuries",
-      link: "More Info",
-      count: "28 Staff"
-    },
-    { 
-      icon: <Building2 className="w-6 h-6" />, 
-      title: "Radiology including MRI", 
-      desc: "Advanced imaging services CT, MRI and interventional radiology",
-      link: "More Info",
-      count: "35 Staff"
-    },
-    { 
-      icon: <Users className="w-6 h-6" />, 
-      title: "Information Technology", 
-      desc: "Digital hospital information systems and patient records",
-      link: "More Info",
-      count: "18 Staff"
-    },
-    { 
-      icon: <Building2 className="w-6 h-6" />, 
-      title: "Orthopaedic Surgery", 
-      desc: "Complex fracture management and trauma reconstruction",
-      link: "More Info",
-      count: "42 Staff"
-    },
-    { 
-      icon: <Activity className="w-6 h-6" />, 
-      title: "Blood Bank Emergency", 
-      desc: "24/7 blood transfusion and emergency blood services",
-      link: "More Info",
-      count: "22 Staff"
-    },
-    { 
-      icon: <Users className="w-6 h-6" />, 
-      title: "MSSS Office", 
-      desc: "Medical Social Service and patient counseling support",
-      link: "More Info",
-      count: "15 Staff"
-    }
-  ];
+  { icon: <Users className="w-6 h-6" />, title: "Chief", desc: "Office of the Chief overseeing hospital leadership and governance", link: "More Info" },
+  { icon: <Stethoscope className="w-6 h-6" />, title: "Orthopaedic", desc: "Diagnosis and surgical management of bone and joint injuries", link: "More Info" },
+  { icon: <Brain className="w-6 h-6" />, title: "Neurosurgery", desc: "Advanced surgical care for brain and spinal disorders", link: "More Info" },
+  { icon: <HeartPulse className="w-6 h-6" />, title: "Trauma Surgery & Critical Care", desc: "Comprehensive trauma management and intensive critical care", link: "More Info" },
+  { icon: <Laptop className="w-6 h-6" />, title: "Computer Facility", desc: "Hospital computing infrastructure and technical support", link: "More Info" },
+  { icon: <Activity className="w-6 h-6" />, title: "Emergency", desc: "24/7 emergency medical and trauma response services", link: "More Info" },
+  { icon: <FileText className="w-6 h-6" />, title: "Account Section", desc: "Financial operations, billing, and accounting services", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "Hospital Administration", desc: "Management of hospital operations and patient services", link: "More Info" },
+  { icon: <Truck className="w-6 h-6" />, title: "Transport Office", desc: "Patient, staff, and logistics transportation services", link: "More Info" },
+  { icon: <ClipboardList className="w-6 h-6" />, title: "Establishment Section", desc: "Human resources, staffing, and personnel administration", link: "More Info" },
+  { icon: <Laptop className="w-6 h-6" />, title: "Information Technology", desc: "Hospital IT systems, networks, and digital records", link: "More Info" },
+  { icon: <Microscope className="w-6 h-6" />, title: "Lab Medicine", desc: "Clinical laboratory diagnostics and investigations", link: "More Info" },
+  { icon: <Activity className="w-6 h-6" />, title: "Radiology", desc: "Diagnostic imaging including X-ray, CT, and MRI", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "Store Section", desc: "Procurement and inventory management of hospital supplies", link: "More Info" },
+  { icon: <Shield className="w-6 h-6" />, title: "Sanitation Office", desc: "Hospital cleanliness, hygiene, and waste management", link: "More Info" },
+  { icon: <FileText className="w-6 h-6" />, title: "Medical Record Section", desc: "Maintenance of patient medical records and documentation", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "Nursing", desc: "Patient care services delivered by trained nursing staff", link: "More Info" },
+
+  { icon: <Syringe className="w-6 h-6" />, title: "TC1 OT", desc: "Dedicated trauma operation theatre services", link: "More Info" },
+  { icon: <HeartPulse className="w-6 h-6" />, title: "TC2 ICU", desc: "Intensive care unit for trauma patients", link: "More Info" },
+  { icon: <HeartPulse className="w-6 h-6" />, title: "TC2A ICU", desc: "Advanced trauma intensive care unit", link: "More Info" },
+  { icon: <HeartPulse className="w-6 h-6" />, title: "TC3 ICU", desc: "Critical care for severe trauma cases", link: "More Info" },
+  { icon: <HeartPulse className="w-6 h-6" />, title: "TC3A ICU", desc: "Specialized ICU for high-dependency trauma care", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC4 Ward", desc: "Trauma patient inpatient ward services", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC4A Ward", desc: "Extended trauma care inpatient ward", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC5 Ward", desc: "General trauma recovery ward", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC5A Ward", desc: "Post-trauma patient care ward", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC6 Ward", desc: "Inpatient trauma treatment facilities", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC6A Ward", desc: "Supportive trauma inpatient services", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC7 Ward", desc: "Long-stay trauma patient ward", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "TC7A Ward", desc: "Extended care trauma ward", link: "More Info" },
+  { icon: <Droplets className="w-6 h-6" />, title: "Blood Bank", desc: "24/7 blood collection, storage, and transfusion services", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "F.OPD", desc: "Follow-up outpatient consultation services", link: "More Info" },
+  { icon: <Syringe className="w-6 h-6" />, title: "Operation Theater", desc: "Advanced surgical operation theatre complex", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "H.I.F.C.O.M", desc: "Hospital infection control and monitoring unit", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "N.I.S", desc: "Nursing information and supervision services", link: "More Info" },
+  { icon: <Activity className="w-6 h-6" />, title: "Physiotherapy", desc: "Rehabilitation and physical therapy services", link: "More Info" },
+  { icon: <Syringe className="w-6 h-6" />, title: "Anaesthesia & CC", desc: "Anaesthesia and critical care management", link: "More Info" },
+  { icon: <Shield className="w-6 h-6" />, title: "Forensic Medicine", desc: "Medico-legal examinations and forensic analysis", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "Dietetics", desc: "Clinical nutrition and dietary planning services", link: "More Info" },
+  { icon: <Hotel className="w-6 h-6" />, title: "Hostel", desc: "Accommodation facilities for staff and residents", link: "More Info" },
+  { icon: <Microscope className="w-6 h-6" />, title: "Lab Medicine (Microbiology)", desc: "Microbiological testing and infection diagnostics", link: "More Info" },
+  { icon: <Microscope className="w-6 h-6" />, title: "Histopathology", desc: "Tissue diagnosis and pathological examination", link: "More Info" },
+  { icon: <Flame className="w-6 h-6" />, title: "Fire Guard", desc: "Fire safety and emergency response services", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "Central Linen Facility (CLF)", desc: "Hospital linen processing and management", link: "More Info" },
+  { icon: <Microscope className="w-6 h-6" />, title: "Lab Resident", desc: "Resident doctors supporting laboratory services", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "Electrical Engineering Department", desc: "Electrical systems maintenance and safety", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "Trauma Nurse Coordinator", desc: "Coordination of trauma nursing services", link: "More Info" },
+  { icon: <Shield className="w-6 h-6" />, title: "EHS", desc: "Environment, health, and safety management", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "Medicine Store", desc: "Storage and distribution of medicines", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "General Store", desc: "General hospital inventory and supplies", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "Linen Store", desc: "Storage and supply of hospital linen", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "MSSO", desc: "Medical social service office and patient support", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "ORBO", desc: "Operational and administrative coordination unit", link: "More Info" },
+  { icon: <Settings className="w-6 h-6" />, title: "E.S.D", desc: "Engineering services department", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "M.S Office", desc: "Medical superintendent office", link: "More Info" },
+  { icon: <Users className="w-6 h-6" />, title: "D.N.S Office", desc: "Director of nursing services office", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "Project", desc: "Hospital development and project management unit", link: "More Info" },
+  { icon: <Building2 className="w-6 h-6" />, title: "Other", desc: "Additional hospital support services", link: "More Info" },
+  { icon: <Activity className="w-6 h-6" />, title: "Emergency Medicine", desc: "Specialized emergency medical care services", link: "More Info" },
+  { icon: <Syringe className="w-6 h-6" />, title: "Neuroanesthesia", desc: "Anesthesia services for neurosurgical procedures", link: "More Info" },
+  { icon: <Stethoscope className="w-6 h-6" />, title: "Paediatric Surgery", desc: "Surgical care for infants and children", link: "More Info" }
+];
 
   return (
-    <section ref={containerRef} className="bg-[#eef7fa] py-20">
+    <section ref={containerRef} className="bg-[#eef7fa] pt-38 py-20">
       {/* Header Section */}
       <div className="max-w-7xl mx-auto px-6 mb-16">
         <div ref={headingRef} className="text-center mb-14">
-          <h2 className="text-4xl font-semibold text-gray-800">
+          <h2 className="text-6xl font-semibold text-gray-800">
             Our <span className="text-[#0AA6C6] font-bold">Departments</span>
           </h2>
           <div 
@@ -167,11 +191,11 @@ const Staff = () => {
       {/* Main Departments Grid */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {departments.map((dept, index) => (
+          {departments.slice(0, visibleCards).map((dept, index) => (
             <div 
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-[#0AA6C6]/20 border-b-4 hover:border-b-[#0AA6C6] p-6 group"
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border  border-[#60b4c5] border-b-4 hover:border-b-[#0AA6C6] p-6 group"
             >
               {/* Icon */}
               <div className="w-12 h-12 bg-cyan-50 rounded-xl flex items-center justify-center mb-4 text-[#0AA6C6] group-hover:bg-[#0AA6C6] group-hover:text-white transition-colors duration-300">
@@ -198,12 +222,17 @@ const Staff = () => {
           ))}
         </div>
 
-        {/* View All CTA */}
-        <div className="text-center mt-16">
-          <button className="bg-[#0AA6C6] hover:bg-[#0891b2] text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-            View All Departments →
-          </button>
-        </div>
+        {/* View More CTA */}
+        {visibleCards < departments.length && (
+          <div className="text-center mt-16">
+            <button 
+              onClick={handleViewMore}
+              className="bg-[#0AA6C6] cursor-pointer hover:bg-[#0891b2] text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              View More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

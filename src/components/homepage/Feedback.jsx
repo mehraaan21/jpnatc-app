@@ -5,7 +5,16 @@ import Faqsani from "../../assets/Doctor.json";
 
 export default function Feedback() {
   return (
-    <section className="bg-[#eef7fa] py-24">
+    <section className="bg-[#eef7fa] py-4">
+      {/* ===== Heading ===== */}
+      <div className="text-center mb-14">
+        <h2 className="text-4xl font-semibold text-gray-800">
+          Share Your{" "}
+          <span className="text-[#0AA6C6] font-bold">Feedback</span>
+        </h2>
+        <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         
         {/* LEFT CONTENT */}
@@ -22,12 +31,12 @@ export default function Feedback() {
 
         {/* RIGHT FORM CARD */}
         <div className="border-b-4  border-[#0AA6C6] rounded-3xl shadow-xl p-10">
-          <div className="text-center mb-8">
+          {/* <div className="text-center mb-8">
             <h3 className="text-3xl font-semibold text-gray-800">
               Submit <span className="text-[#0AA6C6] font-bold">Feedback</span>
             </h3>
             <div className="w-16 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-3"></div>
-          </div>
+          </div> */}
 
           <form className="space-y-6 text-gray-800">
             {/* NAME & EMAIL */}

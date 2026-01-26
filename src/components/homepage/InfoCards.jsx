@@ -77,7 +77,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <Building2 />,
+      icon: <Building2 className="w-6 h-6" />,
     },
     {
       title: "Event & Conference",
@@ -87,7 +87,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <CalendarDays />,
+      icon: <CalendarDays className="w-6 h-6" />,
     },
     {
       title: "RTI Online",
@@ -97,7 +97,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <FileText />,
+      icon: <FileText className="w-6 h-6" />,
     },
     {
       title: "Courses",
@@ -107,7 +107,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <GraduationCap />,
+      icon: <GraduationCap className="w-6 h-6" />,
     },
     {
       title: "Awards",
@@ -117,7 +117,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <Award />,
+      icon: <Award className="w-6 h-6" />,
     },
     {
       title: "Call Centre",
@@ -127,7 +127,7 @@ export default function MoreAbout() {
       linkColor: "text-[#0AA6C6]",
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
-      icon: <PhoneCall />,
+      icon: <PhoneCall className="w-6 h-6" />,
     },
   ];
 
@@ -146,37 +146,35 @@ export default function MoreAbout() {
       </div>
 
       {/* ================= GRID ================= */}
-      <div ref={cardsContainerRef} className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div ref={cardsContainerRef} className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {cards.map((item, index) => (
           <div
             key={index}
             ref={(el) => (cardsRef.current[index] = el)}
-            className={` border border-[#0AA6C6] rounded-2xl p-8  border-b-4 ${item.color} shadow-sm hover:shadow-md transition`}
+            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-[#60b4c5] border-b-4 hover:border-b-[#0AA6C6] p-6 group"
           >
             {/* ICON */}
-            <div
-              className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center mb-6`}
-            >
-              <div className={item.iconColor}>{item.icon}</div>
+            <div className={`w-12 h-12 ${item.iconBg} rounded-xl flex items-center justify-center mb-4 ${item.iconColor} group-hover:bg-[#0AA6C6] group-hover:text-white transition-colors duration-300`}>
+              {item.icon}
             </div>
 
             {/* TITLE */}
-            <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+            <h3 className="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#0AA6C6] transition-colors">
               {item.title}
             </h3>
 
             {/* DESCRIPTION */}
-            <p className="text-gray-500 text-sm leading-relaxed mb-6">
+            <p className="text-gray-600 text-sm leading-relaxed mb-4">
               {item.desc}
             </p>
 
             {/* LINK */}
-            <a
-              href="#"
-              className={`font-medium ${item.linkColor} hover:underline`}
-            >
-              Read more →
-            </a>
+            <div className="pt-4 border-t border-gray-100">
+              <button className={`${item.linkColor} text-sm font-semibold hover:underline flex items-center gap-1`}>
+                Read more
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </button>
+            </div>
           </div>
         ))}
       </div>
