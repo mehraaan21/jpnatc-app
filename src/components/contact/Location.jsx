@@ -1,15 +1,21 @@
 export default function Location() {
     return (
-        <div className="min-h-screen bg-[#eef7fa] py-16">
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Heading */}
-                <div className="text-center mb-14">
+        <div className="bg-[#eef7fa] py-20">
+            {/* Heading */}
+            <div className="max-w-7xl mx-auto px-6 mb-14">
+                <div className="text-center">
                     <h2 className="text-4xl font-semibold text-gray-800">
                         Our <span className="text-[#0AA6C6] font-bold">Location</span>
                     </h2>
                     <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
+                    <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Find your way to JPNATC easily with our location details and 
+                        transportation options from various points in Delhi.
+                    </p>
                 </div>
+            </div>
 
+            <div className="max-w-7xl mx-auto px-4">
                 <div className="bg-white rounded-2xl shadow-lg p-8 border-b-4 border-[#0AA6C6]">
                     <div className="grid md:grid-cols-2 gap-8">
                         <div>

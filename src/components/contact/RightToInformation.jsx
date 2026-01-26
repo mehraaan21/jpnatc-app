@@ -1,15 +1,21 @@
 export default function RightToInformation() {
     return (
-        <div className="min-h-screen bg-[#eef7fa] py-16">
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Heading */}
-                <div className="text-center mb-14">
+        <div className="bg-[#eef7fa] py-20">
+            {/* Heading */}
+            <div className="max-w-7xl mx-auto px-6 mb-14">
+                <div className="text-center">
                     <h2 className="text-4xl font-semibold text-gray-800">
                         Right To <span className="text-[#0AA6C6] font-bold">Information</span>
                     </h2>
                     <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
+                    <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
+                        Learn about the Right to Information Act and how to request 
+                        information from JPNATC for transparency and accountability.
+                    </p>
                 </div>
+            </div>
 
+            <div className="max-w-7xl mx-auto px-4">
                 <div className="bg-white rounded-2xl shadow-lg p-8 border-b-4 border-[#0AA6C6]">
                     <div className="mb-8">
                         <div className="flex items-center gap-4 mb-4">
