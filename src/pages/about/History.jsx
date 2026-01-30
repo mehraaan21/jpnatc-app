@@ -1,59 +1,14 @@
-// <<<<<<< HEAD
-// import React from 'react';
-// =======
-// export default function History() {
-//     return (
-//         <div className="min-h-screen bg-[#eef7fa] py-16">
-//             <div className="max-w-7xl mx-auto px-4">
-//                 {/* Heading */}
-//                 <div className="text-center mb-14">
-//                     <h2 className="text-4xl font-semibold text-gray-800">
-//                         Our <span className="text-[#0AA6C6] font-bold">History</span>
-//                     </h2>
-//                     <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
-//                 </div>
-
-//                 <div className="bg-white rounded-2xl shadow-lg p-8 border-b-4 border-[#0AA6C6]">
-//                     <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-//                         Jai Prakash Narayan Apex Trauma Center (JPNATC) was established with the vision 
-//                         to provide world-class trauma care services to the patients.
-//                     </p>
-//                     <p className="text-gray-600 mb-6 text-lg leading-relaxed">
-//                         Since its inception, the center has been at the forefront of providing 
-//                         emergency medical services, trauma surgery, and rehabilitation.
-//                     </p>
-//                     <p className="text-gray-600 text-lg leading-relaxed">
-//                         Our journey began with a commitment to serve the community and save lives 
-//                         through excellence in healthcare delivery.
-//                     </p>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-// >>>>>>> 1b794d580e0bab16d9471cbefc9021f613e020fb
-
 const History = () => {
   return (
     <div className="bg-white min-h-screen">
-       {/* <div className="text-center my-20">
-        <h1 className="text-5xl font-black text-slate-900 mb-4 uppercase tracking-tighter">
-          Our <span className="text-blue-600">History</span>
-        </h1>
-        <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-      </div> */}
-
-      {/* Header Image Section */}
+            {/* Header Image Section */}
       <div className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <img 
           src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600" 
           alt="JPNATC Hospital Building"
           className="w-full h-full object-cover"
         />
-        {/* Modern White Gradient overlay at bottom */}
-        {/* <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-black/10"></div> */}
-        
-       
+             
       </div>
 
       {/* Main Content Area */}
@@ -62,13 +17,13 @@ const History = () => {
          {/* "History" Title - Matching the image style */}
         <div className="py-6 text-start md:bottom-12 md:left-24">
           <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight mb-6">
-            Our <span className="text-blue-600">History</span>
+            Our <span className="text-[#0AA6C6]">History</span>
           </h1>
         </div>
         
         {/* Established 1984 Blue Line Section */}
-        <div className="border-b-2 border-blue-600 mb-8 pb-3">
-          <h2 className="text-2xl md:text-4xl font-bold text-blue-700">
+        <div className="border-b-2 border-[#0AA6C6] mb-8 pb-3">
+          <h2 className="text-2xl md:text-4xl font-bold text-[#0AA6C6]">
             Established 1984
           </h2>
         </div>
@@ -118,7 +73,7 @@ const History = () => {
         {/* Bottom Decorative Element for Modern Look */}
         <div className="mt-16 flex items-center gap-4">
           <div className="h-px flex-1 bg-slate-200"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-600"></div>
+          <div className="w-3 h-3 rounded-full bg-[#0AA6C6]"></div>
           <div className="h-px flex-1 bg-slate-200"></div>
         </div>
       </div>

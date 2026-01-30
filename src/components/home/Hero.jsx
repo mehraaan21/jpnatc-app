@@ -1,229 +1,101 @@
-import { useEffect, useState } from "react";
+import { Calendar, Phone, FileText, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function Hero() {
-  /* ================= HERO SLIDES ================= */
-  const heroSlides = [
-    "/images/trauma-building.jpg",
-    "/images/trauma-care.jpg",
-    "/images/rehab.jpg",
-  ];
-
-  const [heroIndex, setHeroIndex] = useState(0);
-
-  useEffect(() => {
-    const i = setInterval(
-      () => setHeroIndex((p) => (p + 1) % heroSlides.length),
-      5000
-    );
-    return () => clearInterval(i);
-  }, []);
-
-  /* ================= NOTICES ================= */
-  const notices = [
-    {
-      title: "Precautions against Fire incidents at AIIMS – Advisory",
-      date: "Oct 12, 2023",
-    },
-    {
-      title: "Update on New Patient Registration Portal Guidelines",
-      date: "Oct 10, 2023",
-    },
-    {
-      title: "New Trauma ICU Protocol Released",
-      date: "Sep 29, 2023",
-    },
-  ];
-
-  const [noticeIndex, setNoticeIndex] = useState(0);
-
-  useEffect(() => {
-    const i = setInterval(
-      () => setNoticeIndex((p) => (p + 1) % notices.length),
-      3500
-    );
-    return () => clearInterval(i);
-  }, []);
-
-  /* ================= HEAD MESSAGES ================= */
-  const messages = [
-    {
-      name: "Prof. Kamran Farooque",
-      role: "Head of JPNATC",
-      image: "/images/profile-placeholder.png",
-      text:
-        "An India where anybody who suffers from trauma receives timely, high-quality multidisciplinary care.",
-    },
-    {
-      name: "Dr. XYZ",
-      role: "Director",
-      image: "/images/profile-placeholder.png",
-      text:
-        "Committed to advancing trauma education, research, and patient-centered excellence.",
-    },
-  ];
-
-  const [msgIndex, setMsgIndex] = useState(0);
-
-  useEffect(() => {
-    const i = setInterval(
-      () => setMsgIndex((p) => (p + 1) % messages.length),
-      6000
-    );
-    return () => clearInterval(i);
-  }, []);
-
+export default function AuthorityHero() {
   return (
-    <section
-      role="banner"
-      aria-label="Trauma Care Hero Section"
-      className="
-        relative overflow-hidden bg-slate-900
-        min-h-[75vh] md:min-h-[90vh]
-        pt-32 pb-56
-      "
-    >
-      {/* ================= HERO BACKGROUND CAROUSEL ================= */}
-      {heroSlides.map((src, i) => (
+    <section className="relative min-h-screen bg-[#1c344c] overflow-hidden flex items-center">
+      {/* 1. Immersive Background with Overlay */}
+      <div className="absolute inset-0 z-0">
         <img
-          key={src}
-          src={src}
-          alt="Trauma care facility"
-          className={`
-            absolute inset-0 w-full h-full object-cover
-            transition-opacity duration-1000
-            ${i === heroIndex ? "opacity-100" : "opacity-0"}
-          `}
-          fetchpriority={i === 0 ? "high" : "auto"}
-          loading={i === 0 ? "eager" : "lazy"}
+          src="/hero/medical-tech.webp" 
+          className="w-full h-full object-cover opacity-40"
+          alt="Advanced Healthcare"
         />
-      ))}
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40" />
-
-      {/* ================= HERO CONTENT ================= */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-white">
-        <span className="inline-block bg-cyan-500 text-xs font-semibold px-4 py-1 rounded-full mb-4">
-          APEX CENTER OF EXCELLENCE
-        </span>
-
-        <h1 className="font-serif text-4xl md:text-6xl leading-[1.1] max-w-2xl">
-          Excellence in <br />
-          <span className="text-cyan-400 italic">Trauma Care</span> & Recovery
-        </h1>
-
-        <p className="mt-6 max-w-xl text-lg text-white/90 font-sans">
-          Dedicated to providing high-quality, professional multidisciplinary
-          care and rehabilitation to enable optimal recovery of independent
-          function.
-        </p>
-
-        <Link
-          to="/appointments"
-          className="
-            inline-flex items-center mt-8
-            bg-white text-blue-600 font-semibold
-            px-7 py-3 rounded-full
-            hover:bg-gray-100 transition
-            focus-visible:outline
-          "
-        >
-          Book Appointment <span aria-hidden className="ml-2">→</span>
-        </Link>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0a1118] via-[#0a1118]/80 to-transparent" />
       </div>
 
-      {/* ================= BOTTOM CARDS ================= */}
-      <div
-        className="
-          absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2
-          w-full max-w-7xl px-6
-        "
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* ===== NOTICES CAROUSEL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-black">
-            <div className="flex justify-between mb-4">
-              <h2 className="text-blue-600 font-semibold">
-                Notices & Circulars
-              </h2>
-              <Link to="/notices" className="text-sm text-blue-500">
-                View All
-              </Link>
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        {/* LEFT COLUMN: Main Branding */}
+        <div className="lg:col-span-7 pt-20">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-12 h-[2px] bg-cyan-500" />
+            <span className="text-cyan-500 uppercase tracking-[0.3em] text-xs font-bold">
+              Established 2006 • AIIMS New Delhi
+            </span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-serif text-white leading-[1.1] mb-8">
+            The Apex of <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+              Trauma Excellence
+            </span>
+          </h1>
+
+          <p className="text-gray-400 text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
+            Integrating rapid emergency response with world-class surgical 
+            innovation and compassionate rehabilitation.
+          </p>
+
+          <div className="flex flex-wrap gap-5">
+            <Link to="/appointments" className="group relative px-8 py-4 bg-cyan-600 text-white font-bold rounded-lg overflow-hidden transition-all">
+              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform" />
+              <span className="relative flex items-center gap-2">
+                Get an Appointment <ChevronRight size={18} />
+              </span>
+            </Link>
+            
+            <a href="tel:+911126731237" className="px-8 py-4 border border-white/20 text-white font-bold rounded-lg hover:bg-white/5 transition-all flex items-center gap-2">
+              <Phone size={18} className="text-red-500" /> Emergency: 011-2673-1237
+            </a>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN: Glassmorphism Notice Hub */}
+        <div className="lg:col-span-5 relative">
+          <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-8 rounded-3xl shadow-2xl">
+            <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
+              <h3 className="text-white font-bold text-xl flex items-center gap-2">
+                <FileText className="text-cyan-500" /> Latest Updates
+              </h3>
+              <span className="text-xs text-cyan-500 font-mono animate-pulse">● LIVE</span>
             </div>
 
-            <div className="relative h-20 overflow-hidden">
-              {notices.map((n, i) => (
-                <div
-                  key={n.title}
-                  className={`
-                    absolute inset-0 transition-all duration-500
-                    ${i === noticeIndex
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-4"}
-                  `}
-                >
-                  <p className="font-medium">{n.title}</p>
-                  <span className="text-gray-400 text-sm">{n.date}</span>
+            <div className="space-y-6">
+              {[
+                { date: "AUG 15", title: "79th Independence Day Celebration Invitation" },
+                { date: "JUL 28", title: "New Digitalization Policy for AIIMS Hospital" },
+                { date: "JUL 20", title: "Advisory: Fire Safety Precautions in Wards" }
+              ].map((notice, i) => (
+                <div key={i} className="group cursor-pointer">
+                  <p className="text-cyan-500 text-xs font-bold mb-1">{notice.date}</p>
+                  <p className="text-gray-300 group-hover:text-white transition-colors line-clamp-2">
+                    {notice.title}
+                  </p>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* ===== APPOINTMENT (STATIC) ===== */}
-          <div className="bg-cyan-500 text-white rounded-2xl shadow-xl p-8 text-center">
-            <span aria-hidden className="text-3xl mb-3 block">📅</span>
-
-            <h2 className="text-2xl font-semibold">Book Appointment</h2>
-
-            <p className="text-sm mt-1">
-              अपॉइंटमेंट के लिए कॉल करें
-            </p>
-
-            <a
-              href="tel:+911126731237"
-              className="block text-3xl font-bold my-5"
-            >
-              +91 11 2673 1237
-            </a>
-
-            <Link
-              to="/appointments"
-              className="inline-block bg-white text-cyan-600 font-semibold
-              px-6 py-3 rounded-full hover:bg-gray-100 transition"
-            >
-              Online Registration
+            <Link to="/notices" className="mt-8 flex items-center justify-center w-full py-3 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 transition-all">
+              Explore All Circulars
             </Link>
           </div>
 
-          {/* ===== HEAD MESSAGE CAROUSEL ===== */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 text-black">
-            {messages.map((m, i) => (
-              <div
-                key={m.name}
-                className={`
-                  flex gap-4 transition-opacity duration-500
-                  ${i === msgIndex ? "opacity-100" : "opacity-0 hidden"}
-                `}
-              >
-                <img
-                  src={m.image}
-                  alt={m.name}
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-
-                <div>
-                  <span className="text-xs text-cyan-500 font-semibold">
-                    {m.role}
-                  </span>
-                  <h3 className="font-semibold text-lg">{m.name}</h3>
-                  <p className="text-sm text-gray-600 mt-1 line-clamp-3">
-                    {m.text}
-                  </p>
-                </div>
-              </div>
-            ))}
+          {/* Floating Trust Card */}
+          <div className="absolute -bottom-6 -left-6 bg-gradient-to-br from-cyan-600 to-blue-700 p-6 rounded-2xl shadow-xl hidden md:block">
+            <p className="text-white/80 text-xs uppercase tracking-widest font-bold mb-1">Annual Cases</p>
+            <p className="text-white text-3xl font-black">25,000+</p>
           </div>
+        </div>
+
+      </div>
+
+      {/* Subtle Bottom Bar */}
+      <div className="absolute bottom-0 left-0 w-full border-t border-white/5 bg-black/20 backdrop-blur-md py-4 hidden lg:block">
+        <div className="max-w-7xl mx-auto px-6 flex justify-between text-white/40 text-xs font-medium uppercase tracking-[0.2em]">
+          <span>World Health Organization Partner</span>
+          <span>Integrated Trauma Care System</span>
+          <span>Level 1 Trauma Center</span>
         </div>
       </div>
     </section>

@@ -5,13 +5,14 @@ import Faqsani from "../../assets/Doctor.json";
 
 export default function Feedback() {
   return (
-    <section className="bg-[#eef7fa] py-24">
+    <section className="bg-[#eef7fa] py-20">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-        
+
         {/* LEFT CONTENT */}
         <div>
-          
-        <div className="mt-20">                 <Lottie
+
+          <div className="mt-20">                 .
+            <Lottie
               animationData={Faqsani}
               loop={true}
               className="h-full w-full"

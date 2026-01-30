@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, Link } from "react";
 import {
   Building2,
   CalendarDays,
@@ -24,7 +24,7 @@ export default function MoreAbout() {
       // First animate heading
       gsap.fromTo(
         headingRef.current,
-        { opacity: 0, y: -30 },
+        { opacity: 0, y: -10 },
         {
           opacity: 1,
           y: 0,
@@ -78,6 +78,7 @@ export default function MoreAbout() {
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
       icon: <Building2 />,
+      link : "/staff/departments",
     },
     {
       title: "Event & Conference",
@@ -98,6 +99,7 @@ export default function MoreAbout() {
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
       icon: <FileText />,
+      link : "/contact/right-to-information",
     },
     {
       title: "Courses",
@@ -108,6 +110,7 @@ export default function MoreAbout() {
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
       icon: <GraduationCap />,
+      link : "/education/postgraduate",
     },
     {
       title: "Awards",
@@ -128,6 +131,7 @@ export default function MoreAbout() {
       iconBg: "bg-cyan-50",
       iconColor: "text-[#0AA6C6]",
       icon: <PhoneCall />,
+      link : "/contact",
     },
   ];
 
@@ -172,7 +176,7 @@ export default function MoreAbout() {
 
             {/* LINK */}
             <a
-              href="#"
+              href={item.link }
               className={`font-medium ${item.linkColor} hover:underline`}
             >
               Read more →

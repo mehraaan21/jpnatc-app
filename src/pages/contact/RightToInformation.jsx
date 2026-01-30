@@ -1,83 +1,119 @@
-export default function RightToInformation() {
-    return (
-        <div className="min-h-screen bg-[#eef7fa] py-16">
-            <div className="max-w-7xl mx-auto px-4">
-                {/* Heading */}
-                <div className="text-center mb-14">
-                    <h2 className="text-4xl font-semibold text-gray-800">
-                        Right To <span className="text-[#0AA6C6] font-bold">Information</span>
-                    </h2>
-                    <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4"></div>
-                </div>
+import { ClipboardList, UserCheck, ShieldCheck, Landmark, FileText, BadgeIndianRupee, CheckCircle } from "lucide-react";
 
-                <div className="bg-white rounded-2xl shadow-lg p-8 border-b-4 border-[#0AA6C6]">
-                    <div className="mb-8">
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="w-14 h-14 bg-[#0AA6C6] rounded-xl flex items-center justify-center text-white text-2xl">
-                                📋
-                            </div>
-                            <h2 className="text-2xl font-semibold text-gray-800">About RTI</h2>
-                        </div>
-                        <p className="text-gray-600 text-lg leading-relaxed">
-                            The Right to Information Act, 2005 empowers citizens to seek information 
-                            from public authorities. JPNATC is committed to transparency and accountability.
-                        </p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-6 mb-8">
-                        <div className="bg-linear-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 bg-[#0AA6C6] rounded-lg flex items-center justify-center text-white">
-                                    👤
-                                </div>
-                                <h3 className="text-xl font-semibold text-[#0AA6C6]">Appellate Authority</h3>
-                            </div>
-                            <p className="text-gray-700">
-                                Dr. Name<br />
-                                Designation<br />
-                                Phone: 011-XXXXXXX
-                            </p>
-                        </div>
-                        <div className="bg-linear-to-br from-cyan-50 to-cyan-100 p-8 rounded-xl">
-                            <div className="flex items-center gap-3 mb-4">
-                                <div className="w-10 h-10 bg-[#0AA6C6] rounded-lg flex items-center justify-center text-white">
-                                    👤
-                                </div>
-                                <h3 className="text-xl font-semibold text-[#0AA6C6]">Public Information Officer</h3>
-                            </div>
-                            <p className="text-gray-700">
-                                Mr. Name<br />
-                                Designation<br />
-                                Phone: 011-XXXXXXX
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-[#0AA6C6] rounded-lg flex items-center justify-center text-white">
-                                ✓
-                            </div>
-                            <h2 className="text-2xl font-semibold text-gray-800">Required Information</h2>
-                        </div>
-                        <p className="text-gray-600 text-lg leading-relaxed">
-                            For seeking information under RTI Act, please submit your application 
-                            along with the required documents to the Public Information Officer.
-                        </p>
-                        <ul className="list-disc list-inside text-gray-700 space-y-3 text-lg bg-cyan-50 p-6 rounded-xl">
-                            <li>Name and address of the applicant</li>
-                            <li>Particulars of information sought</li>
-                            <li>Whether the information is required by post or email</li>
-                            <li>Any other relevant details</li>
-                        </ul>
-                        <div className="bg-linear-to-br from-[#0AA6C6] to-cyan-600 text-white p-6 rounded-xl">
-                            <p className="font-semibold text-lg">
-                                <span className="mr-2">💰</span>RTI Application Fee: Rs. 10/- (by demand draft or money order)
-                            </p>
-                        </div>
-                    </div>
-                </div>
+export default function RightToInformation() {
+  const authorities = [
+    {
+      role: "Appellate Authority",
+      name: "Prof. Kamran Farooque",
+      designation: "Chief, JPN Apex Trauma Centre, AIIMS",
+      address: "Room No. 401, 4th Floor, Raj Nagar, New Delhi",
+      icon: <UserCheck className="w-6 h-6" />,
+    },
+    {
+      role: "Central Public Information Officer (CPIO)",
+      name: "Prof. Sanjeev Lalwani",
+      designation: "Professor of Forensic Medicine",
+      address: "JPN Apex Trauma Centre, AIIMS, Raj Nagar, New Delhi",
+      icon: <Landmark className="w-6 h-6" />,
+    },
+    {
+      role: "Assistant Public Information Officer",
+      name: "Mr. Shashi Kant Kharwar",
+      designation: "Administrative Officer",
+      address: "Room No. 403, 4th Floor, JPNATC, New Delhi",
+      icon: <ShieldCheck className="w-6 h-6" />,
+    },
+  ];
+
+  return (
+    <section className="w-full bg-[#f8fafc] pt-24 pb-20 overflow-x-hidden">
+      
+      {/* ===== Heading (Website Style) ===== */}
+      <div className="max-w-7xl mx-auto px-6 text-center mb-12">
+        <h1 className="text-4xl md:text-6xl font-semibold text-slate-800">
+          Right To <span className="text-[#0AA6C6] font-bold">Information</span>
+        </h1>
+        <div className="w-20 h-1 bg-[#0AA6C6] rounded-full mx-auto mt-4" />
+        <p className="mt-6 text-slate-600 max-w-2xl mx-auto text-base md:text-lg">
+          JPNATC is committed to transparency and accountability under the RTI Act, 2005.
+        </p>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6">
+        {/* Main White Card */}
+        <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+          
+          {/* Top Intro Section */}
+          <div className="p-8 md:p-12 bg-slate-50 border-b border-slate-100 flex flex-col md:flex-row items-center gap-6">
+            <div className="w-16 h-16 bg-[#0AA6C6] rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-cyan-100">
+              <ClipboardList size={32} />
             </div>
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl font-bold text-slate-800">About RTI</h2>
+              <p className="text-slate-600 leading-relaxed mt-1">
+                Citizens have the right to seek information from public authorities to ensure transparency.
+              </p>
+            </div>
+          </div>
+
+          <div className="p-8 md:p-12">
+            {/* Authorities Grid - Fixed with standard grid to prevent layout breaking */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {authorities.map((item, idx) => (
+                <div key={idx} className="p-6 rounded-2xl border border-slate-200 bg-white hover:border-[#0AA6C6] transition-all">
+                  <div className="text-[#0AA6C6] mb-4">{item.icon}</div>
+                  <p className="text-[10px] font-black text-[#0AA6C6] uppercase tracking-widest mb-1">{item.role}</p>
+                  <h4 className="text-lg font-bold text-slate-800 leading-tight">{item.name}</h4>
+                  <p className="text-xs font-medium text-slate-500 mt-1 mb-4">{item.designation}</p>
+                  <p className="text-xs text-slate-400 border-t pt-4 leading-relaxed">
+                    {item.address}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Application Requirements & Fee */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              
+              {/* Requirements List */}
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                  <CheckCircle className="text-green-500" size={20} /> Requirements
+                </h3>
+                <div className="space-y-3">
+                  {[
+                    "Applicant's Name & Address",
+                    "Details of information sought",
+                    "Mode of delivery (Post/Email)",
+                  ].map((text, i) => (
+                    <div key={i} className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl text-sm font-semibold text-slate-700">
+                      <FileText size={16} className="text-[#0AA6C6]" /> {text}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Fee Box - Simplified styling to prevent "fatna" */}
+              <div className="bg-[#074d8d] rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                <BadgeIndianRupee className="absolute -right-4 -bottom-4 w-24 h-24 opacity-10" />
+                <h4 className="text-xl font-bold mb-2">RTI Fee</h4>
+                <div className="text-4xl font-black mb-4">₹10</div>
+                <p className="text-sm text-blue-100 mb-6 leading-relaxed">
+                  Submit via Demand Draft or Postal Order in favor of <strong>"Director AIIMS"</strong>.
+                </p>
+                <a 
+                  href="https://rtionline.gov.in/" 
+                  target="_blank" 
+                  className="inline-block bg-[#0AA6C6] px-6 py-3 rounded-xl font-bold text-sm hover:bg-white hover:text-[#074d8d] transition-all"
+                >
+                  Apply Online →
+                </a>
+              </div>
+
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </section>
+  );
 }

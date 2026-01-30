@@ -1,216 +1,170 @@
 import { useState, useEffect } from "react";
-import { Search, Menu, X, ChevronDown } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Search, Menu, X, ChevronDown, Phone, MapPin } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import image from "../../../assets/jpnatc_icon.png";
+import NavDropdown from "./NavDropdown"; 
 
-export default function Header() {
-    const [openDropdown, setOpenDropdown] = useState(null);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+// Importing data
+import { navLinks, dropdowns } from "../../../utils/data";
 
-    const dropdowns = {
-        about: [
-            { name: "History", href: "/about/history" },
-            { name: "Mission", href: "/about/mission" },
-            { name: "Aims And Objective", href: "/about/aims-and-objective" },
-            { name: "Facilities", href: "/about/facilities" },
-            { name: "Heirarchy", href: "/about/heirarchy" },
-            { name: "Photo Gallery", href: "/about/photo-gallery" },
-            { name: "IT Innovation", href: "/about/it-innovation" },
-            { name: "Ex Chief", href: "/about/ex-chief" },
-        ],
-        education: [
-            { name: "Undergraduate Programs", href: "/education/undergraduate" },
-            { name: "Postgraduate Courses", href: "/education/postgraduate" },
-            { name: "Research Programs", href: "/education/research" },
-            { name: "Continuing Education", href: "/education/continuing-education" },
-        ],
-        contact: [
-            { name: "Contact Us", href: "/contact/contact-us" },
-            { name: "Location", href: "/contact/location" },
-            { name: "Right To Information", href: "/contact/right-to-information" },
-        ],
-    };
+export default function Navbar() {
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
-    useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 20);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
 
-    const navLinks = [
-        { name: "Home", href: "/" },
-        { name: "About Us", dropdown: "about" },
-        { name: "Staff", href: "/staff" },
-        { name: "Faculty", href: "/faculties" },
-        { name: "Education", dropdown: "education" },
-        { name: "Notices", href: "/notices" },
-        { name: "Contact", dropdown: "contact" },
-    ];
+  // Scroll Handler
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-    return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-            {/* ================= NAVBAR ================= */}
-            <div className="border-b border-[#0AA6C6]">
-                <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                    
-                    {/* LOGO */}
-                    <Link to="/">
-                        <img
-                            src={image}
-                            alt="JPNATC"
-                            className={`transition-all duration-300 ${
-                                isScrolled ? "h-12" : "h-16"
-                            }`}
-                        />
-                    </Link>
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 shadow-sm">
+      
+      {/* 1. TOP BAR (Blue) */}
+      <div className={`bg-linear-to-br from-[#063a4d] via-[#0a5671] to-[#063a4d] text-white transition-all duration-500 overflow-hidden ${
+        isScrolled ? "h-0 opacity-0" : "h-10 opacity-100"
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center text-[11px] font-bold uppercase tracking-wider">
+          <div className="flex gap-6">
+            <a href="tel:+911126731237" className="flex items-center gap-2 hover:text-red-300 transition-colors">
+              <Phone size={12} /> Emergency: 011-2673-1237
+            </a>
+            <span className="hidden sm:flex items-center gap-2">
+              <MapPin size={12} /> AIIMS New Delhi
+            </span>
+          </div>
+          <div className="hidden md:flex gap-4">
+            <Link to="/appointments" className="hover:text-cyan-300 transition-colors">OPD Schedule</Link>
+          </div>
+        </div>
+      </div>
 
-                    {/* DESKTOP NAV */}
-                    <nav className="hidden lg:flex items-center gap-1">
-                        {navLinks.map((link, index) => (
-                            <div
-                                key={index}
-                                className="relative"
-                                onMouseEnter={() =>
-                                    link.dropdown && setOpenDropdown(link.dropdown)
-                                }
-                            >
-                                {link.dropdown ? (
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            setOpenDropdown(
-                                                openDropdown === link.dropdown
-                                                    ? null
-                                                    : link.dropdown
-                                            )
-                                        }
-                                        className="flex items-center gap-1 px-4 py-2
-                                                   font-medium text-gray-700 hover:text-[#0AA6C6]"
-                                    >
-                                        {link.name}
-                                        <ChevronDown
-                                            size={16}
-                                            className={`transition-transform ${
-                                                openDropdown === link.dropdown
-                                                    ? "rotate-180"
-                                                    : ""
-                                            }`}
-                                        />
-                                    </button>
-                                ) : (
-                                    <Link
-                                        to={link.href}
-                                        className="px-4 py-2 font-medium text-gray-700 hover:text-[#0AA6C6]"
-                                    >
-                                        {link.name}
-                                    </Link>
-                                )}
+      {/* 2. MAIN NAVBAR */}
+      <nav className="bg-white transition-all duration-300 border-b border-gray-100">
+        <div className={`max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? "h-18" : "h-20"
+        }`}>
+          
+          {/* LOGO */}
+          <Link to="/" className="flex-shrink-0">
+            <img 
+              src={image} 
+              alt="JPNATC" 
+              className={`transition-all duration-300 w-auto ${isScrolled ? "h-10" : "h-14"}`} 
+            />
+          </Link>
 
-                                {/* DROPDOWN */}
-                                {link.dropdown &&
-                                    openDropdown === link.dropdown && (
-                                        <div
-                                            onMouseLeave={() =>
-                                                setOpenDropdown(null)
-                                            }
-                                            className="absolute top-full left-1/2 -translate-x-1/2 mt-2
-                                                       min-w-55 bg-white rounded-xl shadow-xl
-                                                       border border-gray-100 py-2 z-50"
-                                        >
-                                            {dropdowns[link.dropdown].map(
-                                                (item, idx) => (
-                                                    <Link
-                                                        key={idx}
-                                                        to={item.href}
-                                                        onClick={() =>
-                                                            setOpenDropdown(null)
-                                                        }
-                                                        className="block px-4 py-3 text-sm text-gray-700
-                                                                   hover:bg-[#0AA6C6] hover:text-white transition"
-                                                    >
-                                                        {item.name}
-                                                    </Link>
-                                                )
-                                            )}
-                                        </div>
-                                    )}
-                            </div>
-                        ))}
+          {/* DESKTOP MENU */}
+          <div className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link, i) => (
+              <div 
+                key={i} 
+                className="relative"
+                onMouseEnter={() => link.dropdown && setOpenDropdown(link.dropdown)}
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                {link.dropdown ? (
+                  <button className={`flex items-center gap-1 px-4 py-2 text-sm font-semibold transition-colors
+                    ${openDropdown === link.dropdown ? "text-[#0AA6C6]" : "text-gray-700 hover:text-[#0AA6C6]"}`}>
+                    {link.name}
+                    <ChevronDown size={14} className={`transition-transform duration-300 ${openDropdown === link.dropdown ? "rotate-180" : ""}`} />
+                  </button>
+                ) : (
+                  <Link 
+                    to={link.href} 
+                    className="px-4 py-2 text-sm font-semibold text-gray-700 hover:text-[#0AA6C6] transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                )}
 
-                        <button className="ml-4 p-2 text-gray-600 hover:text-[#0AA6C6]">
-                            <Search size={20} />
-                        </button>
+                {/* USING YOUR NavDropdown COMPONENT */}
+                {link.dropdown && (
+                  <NavDropdown 
+                    items={dropdowns[link.dropdown]} 
+                    isOpen={openDropdown === link.dropdown} 
+                  />
+                )}
+              </div>
+            ))}
 
+            <div className="flex items-center border-l ml-4 pl-4 gap-4">
+              <button className="text-gray-500 hover:text-[#0AA6C6] transition-colors"><Search size={20} /></button>
+              <Link 
+                to="/patient-dashboard" 
+                className="bg-[#1d7f9d] hover:bg-[#16698c] text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-md active:scale-95"
+              >
+                Patient Dashboard
+              </Link>
+            </div>
+          </div>
+
+          {/* MOBILE TOGGLE */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-[#115081] hover:bg-slate-50 rounded-lg transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* 3. MOBILE MENU */}
+      <div className={`lg:hidden fixed inset-0 bg-white z-[40] transition-transform duration-500 ease-in-out ${
+        isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+      }`} style={{ top: isScrolled ? "64px" : "80px" }}>
+        <div className="h-full overflow-y-auto px-6 py-8 pb-32">
+          <div className="flex flex-col gap-2">
+            {navLinks.map((link, i) => (
+              <div key={i} className="border-b border-gray-50 last:border-none">
+                {link.dropdown ? (
+                  <details className="group">
+                    <summary className="flex justify-between items-center py-4 text-md font-bold text-gray-800 list-none cursor-pointer">
+                      {link.name}
+                      <ChevronDown size={20} className="group-open:rotate-180 transition-transform duration-300" />
+                    </summary>
+                    <div className="bg-slate-50 rounded-xl mb-4 py-2 border border-slate-100">
+                      {dropdowns[link.dropdown]?.map((item, idx) => (
                         <Link
-                            to="/patient-dashboard"
-                            className="ml-4 px-5 py-2.5 bg-linear-to-r
-                                       from-[#0B5DBB] to-[#0AA6C6]
-                                       text-white rounded-lg font-medium"
+                          key={idx}
+                          to={item.href}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="block px-6 py-3 text-gray-600 font-medium hover:text-[#0AA6C6]"
                         >
-                            Patient Dashboard
+                          {item.name}
                         </Link>
-                    </nav>
-
-                    {/* MOBILE BUTTON */}
-                    <button
-                        className="lg:hidden"
-                        onClick={() =>
-                            setIsMobileMenuOpen(!isMobileMenuOpen)
-                        }
-                    >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
-                </div>
-            </div>
-
-            {/* ================= MOBILE MENU ================= */}
-            <div
-                className={`lg:hidden transition-all duration-300 overflow-hidden ${
-                    isMobileMenuOpen ? "max-h-150" : "max-h-0"
-                }`}
+                      ))}
+                    </div>
+                  </details>
+                ) : (
+                  <Link 
+                    to={link.href} 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-4 text-lg font-bold text-gray-800 hover:text-[#0AA6C6]"
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+            <Link 
+              to="/patient-dashboard" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-8 w-full py-4 bg-[#115081] text-white text-center rounded-xl font-bold shadow-lg"
             >
-                <div className="px-4 py-4 space-y-2">
-                    {navLinks.map((link, index) => (
-                        <div key={index}>
-                            {link.dropdown ? (
-                                <details>
-                                    <summary className="flex justify-between px-4 py-3 font-medium cursor-pointer">
-                                        {link.name}
-                                        <ChevronDown size={18} />
-                                    </summary>
-                                    <div className="pl-4">
-                                        {dropdowns[link.dropdown].map(
-                                            (item, idx) => (
-                                                <Link
-                                                    key={idx}
-                                                    to={item.href}
-                                                    onClick={() =>
-                                                        setIsMobileMenuOpen(false)
-                                                    }
-                                                    className="block px-4 py-2 text-sm"
-                                                >
-                                                    {item.name}
-                                                </Link>
-                                            )
-                                        )}
-                                    </div>
-                                </details>
-                            ) : (
-                                <Link
-                                    to={link.href}
-                                    onClick={() =>
-                                        setIsMobileMenuOpen(false)
-                                    }
-                                    className="block px-4 py-3 font-medium"
-                                >
-                                    {link.name}
-                                </Link>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </header>
-    );
+              Patient Dashboard
+            </Link>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }
